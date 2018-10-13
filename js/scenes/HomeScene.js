@@ -33,7 +33,7 @@ export default class HomeScene extends Component {
   }
 
   render() {
-    console.log("STATE!", this.props)
+    console.log(this.props)
     return (
       <View style={localStyles.outer} >
         <View style={localStyles.inner} >

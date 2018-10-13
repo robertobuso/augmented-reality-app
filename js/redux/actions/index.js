@@ -8,16 +8,13 @@ export const chooseAudio = (audioSelection) => {
 }
 
 export const loadExperiences = () => {
-  return (dispatch) => {
-    fetch('http://127.0.0.1:3000/api/v1/experiences')
-      .then(data => console.log('HI!!!!'))
-      .catch(error => console.log(error))
-    fetchExperiences()
+    return (dispatch) => {fetchExperiences()
     .then(experiences => {
       dispatch(setExperiences(experiences))
     })
   }
 }
+
 
 export const setExperiences = (experiences) => {
   return {
