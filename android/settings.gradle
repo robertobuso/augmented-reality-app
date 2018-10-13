@@ -1,0 +1,3 @@
+rootProject.name = 'Mod5Frontend_3'
+
+include ':app'
