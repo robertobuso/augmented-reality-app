@@ -32,28 +32,28 @@ class StartContinueButtons extends Component {
 
   render() {
     return(
-    <View>
-      <View>
-        <TouchableHighlight style={localStyles.buttons}
-          onPress={(event) => this._handleStartButton('start')}
-          underlayColor={'#68a0ff'} >
-          <Text style={localStyles.buttonText}>start</Text>
-        </TouchableHighlight>
-      </View>
+      <View style={localStyles.buttonInner}>
+        <View style={localStyles.container}>
+          <TouchableHighlight style={localStyles.buttons}
+            onPress={(event) => this._handleStartButton('start')}
+            underlayColor={'#68a0ff'} >
+            <Text style={localStyles.buttonText}>start</Text>
+          </TouchableHighlight>
+        </View>
 
-      {this.props.experiences ?
-        this.props.experiences.length > 0 ?
-          <View style={localStyles.buttonInner}>
-            <TouchableHighlight style={localStyles.buttons}
-              onPress={(event) => this._handleStartButton('continue')}
-              underlayColor={'#68a0ff'} >
-              <Text style={localStyles.buttonText}>continue</Text>
-            </TouchableHighlight>
-          </View>
+        {this.props.experiences ?
+          this.props.experiences.length > 0 ?
+            <View style={localStyles.buttonInner}>
+              <TouchableHighlight style={localStyles.buttons}
+                onPress={(event) => this._handleStartButton('continue')}
+                underlayColor={'#68a0ff'} >
+                <Text style={localStyles.buttonText}>continue</Text>
+              </TouchableHighlight>
+            </View>
+          : null
         : null
-      : null
-      }
-    </View>
+        }
+      </View>
   )
   }
 }

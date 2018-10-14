@@ -15,7 +15,6 @@ export const loadExperiences = () => {
   }
 }
 
-
 export const setExperiences = (experiences) => {
   return {
     type: 'LOAD_EXPERIENCES',

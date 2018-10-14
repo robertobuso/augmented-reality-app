@@ -1,12 +1,3 @@
-/**
- * Copyright (c) 2017-present, Viro, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -21,6 +12,8 @@ import {
 import { connect } from 'react-redux'
 
 import { chooseAudio } from './js/redux/actions'
+
+import { loadExperiences } from './js/redux/actions'
 
 import {
   ViroARSceneNavigator
@@ -48,6 +41,10 @@ export default class ViroSample extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.loadExperiences()
+  }
+
   render() {
     if (!this.props.currentExperience || this.props.currentExperience.length === 0) {
       return this._startExperience();
@@ -60,7 +57,7 @@ export default class ViroSample extends Component {
     return (
       <HomeScene
         handleStartButton={this._handleStartButton}
-        setAudio={this._setAudio}/>
+      />
     )
   }
 
@@ -71,11 +68,6 @@ export default class ViroSample extends Component {
     );
   }
 
-
-   _setAudio = (audioSelection) => {
-    this.props.chooseAudio(audioSelection)
-  }
-
   _exitViro = () => {
     this.setState({
       navigatorType : UNSET
@@ -83,8 +75,66 @@ export default class ViroSample extends Component {
   }
 }
 
+const localStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  outer : {
+    flex : 1,
+    flexDirection: 'row',
+    backgroundColor: "black"
+  },
+  inner: {
+    flex : 1,
+    flexDirection: 'column',
+    alignItems:'center',
+    backgroundColor: "black",
+    marginTop: 300
+  },
+  titleText: {
+    paddingTop: 30,
+    paddingBottom: 20,
+    color:'#fff',
+    textAlign:'center',
+    fontSize : 35
+  },
+  flowerText: {
+    paddingTop: 30,
+    paddingBottom: 20,
+    color:'#FF0000',
+    textAlign:'center',
+    fontSize : 35
+  },
+  buttonInner: {
+    flex : 1,
+    flexDirection: 'column',
+    alignItems:'center',
+    backgroundColor: "black",
+    marginTop: 50
+  },
+  buttonText: {
+    color:'#fff',
+    textAlign:'center',
+    fontSize : 20
+  },
+  buttons : {
+    height: 50,
+    width: 100,
+    paddingTop:10,
+    paddingBottom:10,
+    marginTop: 5,
+    marginBottom: 5,
+    backgroundColor:'#68a0cf',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#fff',
+  }
+});
+
 const mapStateToProps = (state) => {
   return state
 }
 
-module.exports =  connect(mapStateToProps, { chooseAudio } )(ViroSample)
+module.exports =  connect(mapStateToProps, { chooseAudio, loadExperiences })(ViroSample)

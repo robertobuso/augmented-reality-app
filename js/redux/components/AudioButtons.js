@@ -1,51 +1,41 @@
-'use strict';
+import { connect } from 'react-redux'
 
 import React, { Component } from 'react';
 
+import { chooseAudio } from '../actions'
+
 import {
-  AppRegistry,
   Text,
   View,
   StyleSheet,
-  PixelRatio,
   TouchableHighlight,
   Alert
 } from 'react-native';
 
-import {
-  ViroARScene,
-  ViroText,
-  ViroConstants,
-  ViroARPlane,
-  Viro3DObject,
-  ViroAmbientLight,
-  ViroMaterials
-} from 'react-viro';
+class AudioButtons extends Component {
 
-import { connect } from 'react-redux'
-
-import StartContinueButtons from '../redux/components/StartContinueButtons.js'
-import AudioButtons from '../redux/components/AudioButtons.js'
-
-export default class HomeScene extends Component {
   render() {
-    console.log('STATE!', this.props)
     return (
-      <View style={localStyles.outer} >
-        <View style={localStyles.inner} >
-          <Text style={localStyles.titleText}>
-            They May Cut All the{' '}
-            <Text style={localStyles.flowerText}>
-              Flowers
-            </Text>
-            <Text style={localStyles.titleText}>
-              ...
-            </Text>
-          </Text>
-
-          <AudioButtons />
-
-          <StartContinueButtons />
+      <View style={localStyles.buttonInner}>
+        <View style={localStyles.container}>
+          <TouchableHighlight style={localStyles.buttons}
+            onPress={() => this.props.chooseAudio('audio')
+            }
+            underlayColor={'#68a0ff'} >
+            <Text style={localStyles.buttonText}>audio</Text>
+          </TouchableHighlight>
+          {' '}
+          <TouchableHighlight style={localStyles.buttons}
+            onPress={() => this.props.chooseAudio('titles')}
+            underlayColor={'#68a0ff'} >
+            <Text style={localStyles.buttonText}>titles</Text>
+          </TouchableHighlight>
+          {' '}
+          <TouchableHighlight style={localStyles.buttons}
+            onPress={(event) => this.props.chooseAudio('both')}
+            underlayColor={'#68a0ff'}>
+            <Text style={localStyles.buttonText}>both</Text>
+          </TouchableHighlight>
         </View>
       </View>
     )
@@ -109,9 +99,8 @@ const localStyles = StyleSheet.create({
     borderColor: '#fff',
   }
 });
-
 const mapStateToProps = (state) => {
   return state
 }
 
-module.exports = connect (mapStateToProps)(HomeScene);
+module.exports =  connect(mapStateToProps, { chooseAudio } )(AudioButtons)
