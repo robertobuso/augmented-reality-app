@@ -13,7 +13,7 @@ import { connect } from 'react-redux'
 
 import { chooseAudio } from './js/redux/actions'
 
-import { loadExperiences } from './js/redux/actions'
+import { loadExperience } from './js/redux/actions'
 
 import {
   ViroARSceneNavigator
@@ -42,11 +42,11 @@ export default class ViroSample extends Component {
   }
 
   componentDidMount() {
-    this.props.loadExperiences()
+    this.props.loadExperience()
   }
 
   render() {
-    if (!this.props.currentExperience || this.props.currentExperience.length === 0) {
+    if (!this.props.start || this.props.start === 'false') {
       return this._startExperience();
     } else {
       return this._getARNavigator();
@@ -55,9 +55,7 @@ export default class ViroSample extends Component {
 
   _startExperience = () => {
     return (
-      <HomeScene
-        handleStartButton={this._handleStartButton}
-      />
+      <HomeScene />
     )
   }
 
@@ -137,4 +135,4 @@ const mapStateToProps = (state) => {
   return state
 }
 
-module.exports =  connect(mapStateToProps, { chooseAudio, loadExperiences })(ViroSample)
+module.exports =  connect(mapStateToProps, { chooseAudio, loadExperience })(ViroSample)

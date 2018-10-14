@@ -25,19 +25,35 @@ export const setExperience = (experience) => {
 }
 
 export const startNewExperience = (status) => {
-  //This is where we would PATCH the status of the experience and then dispatch it as payload.
-  return {
-    type: 'CHOOSE_EXPERIENCE',
-    payload: { status }
-  }
+  return (dispatch) =>
+  dispatch(setNewExperience(status))
 }
 
 export const startSavedExperience = (status) => {
   //This is where we would PATCH the status of the experience and then dispatch it as payload.
+}
+
+export const setNewExperience = (status) => {
   return {
     type: 'CHOOSE_EXPERIENCE',
-    payload: { status }
+    payload: {
+      start: true,
+      status: status,
+      audio: '',
+      tasks: [],
+      items: []
+     }
   }
+}
+
+export const setSavedExperience = (status) => {
+  return {
+    type: 'CHOOSE_EXPERIENCE',
+    payload: {
+    start: true,
+    status: status
+   }
+ }
 }
 
 // completeTask

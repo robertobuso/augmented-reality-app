@@ -27,7 +27,7 @@ class StartContinueButtons extends Component {
 } else if (response === 'start') {
   this.props.startNewExperience('new')
 } else if (response === 'continue')
-  this.props.startSavedExperience('continue')
+  this.props.startSavedExperience('saved')
   }
 
   render() {
@@ -42,7 +42,7 @@ class StartContinueButtons extends Component {
         </View>
 
         {this.props.experience ?
-          this.props.experience === 'saved' ?
+          this.props.experience.status === 'saved' ?
             <View style={localStyles.buttonInner}>
               <TouchableHighlight style={localStyles.buttons}
                 onPress={(event) => this._handleStartButton('continue')}
