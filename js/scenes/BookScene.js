@@ -11,7 +11,8 @@ import {
   ViroARPlane,
   Viro3DObject,
   ViroAmbientLight,
-  ViroMaterials
+  ViroMaterials,
+  ViroSound
 } from 'react-viro';
 
 export default class BookScene extends Component {
@@ -31,6 +32,10 @@ export default class BookScene extends Component {
   render() {
     return (
       <ViroARScene>
+        <ViroSound
+          source={require("../objects/song.mp3")}
+          volume={1.0}
+          paused={false}/>
         <ViroARPlane>
           <ViroAmbientLight color="#ffffff"/>
           <Viro3DObject source={require('../objects/book_obj/objBook.obj')}

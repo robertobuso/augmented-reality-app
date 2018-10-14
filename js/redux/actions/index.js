@@ -52,16 +52,12 @@ export const setNewExperience = (experience) => {
 }
 
 export const startSavedExperience = (status) => {
-  //This is where we would PATCH the status of the experience and then dispatch it as payload.
-}
-
-export const setSavedExperience = (status) => {
   return {
     type: 'CHOOSE_EXPERIENCE',
     payload: {
     status: status
-   }
- }
+    }
+  }
 }
 
 // completeTask
