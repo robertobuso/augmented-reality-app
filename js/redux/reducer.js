@@ -1,9 +1,12 @@
 const initialState = {
         start: false,
-        status: '',
-        tasks: [],
-        items: [],
-        audio: ''
+        status: 'new',
+        audio: '',
+        flower_one: false,
+        flower_two: false,
+        flower_three: false,
+        drag_book: false,
+        take_flower_one: false
        }
 
 const reducer = (state = initialState, action) => {
@@ -25,13 +28,15 @@ const reducer = (state = initialState, action) => {
       }
 
       case 'CHOOSE_EXPERIENCE':
+      console.log(action.payload.experience.flower_one)
       return {
-        ...state,
-        status: action.payload.status,
-        start: action.payload.start,
-        audio: action.payload.audio,
-        tasks: action.payload.tasks,
-        items: action.payload.items
+        status: action.payload.experience.status,
+        start: true,
+        flower_one: action.payload.experience.flower_one,
+        flower_two: action.payload.experience.flower_two,
+        flower_three: action.payload.experience.flower_three,
+        drag_book: action.payload.experience.drag_book,
+        take_flower_one: action.payload.experience.take_flower_one
       }
 
      default:
