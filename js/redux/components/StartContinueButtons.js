@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 
 import React, { Component } from 'react';
 
-import { chooseExperience } from '../actions'
+import { startNewExperience, startSavedExperience } from '../actions'
 
 import {
   Text,
@@ -25,9 +25,9 @@ class StartContinueButtons extends Component {
   { cancelable: false }
 )
 } else if (response === 'start') {
-  this.props.chooseExperience([1,2,3])
+  this.props.startNewExperience('new')
 } else if (response === 'continue')
-  this.props.chooseExperience(this.props.experiences.last)
+  this.props.startSavedExperience('continue')
   }
 
   render() {
@@ -41,8 +41,8 @@ class StartContinueButtons extends Component {
           </TouchableHighlight>
         </View>
 
-        {this.props.experiences ?
-          this.props.experiences.length > 0 ?
+        {this.props.experience ?
+          this.props.experience === 'saved' ?
             <View style={localStyles.buttonInner}>
               <TouchableHighlight style={localStyles.buttons}
                 onPress={(event) => this._handleStartButton('continue')}
@@ -89,4 +89,4 @@ const mapStateToProps = (state) => {
   return state
 }
 
-module.exports =  connect(mapStateToProps, { chooseExperience } )(StartContinueButtons)
+module.exports =  connect(mapStateToProps, { startNewExperience, startSavedExperience } )(StartContinueButtons)

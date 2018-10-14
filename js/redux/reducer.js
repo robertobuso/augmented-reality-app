@@ -1,6 +1,7 @@
 const initialState = {
-        experiences: [],
-        currentExperience: [],
+        experience: [],
+        tasks: [],
+        items: [],
         audio: ''
        }
 
@@ -13,16 +14,16 @@ const reducer = (state = initialState, action) => {
         audio: action.payload
       }
 
-      case 'LOAD_EXPERIENCES':
+      case 'LOAD_EXPERIENCE':
       return {
         ...state,
-        experiences: action.payload.experiences
+        experience: action.payload.experience
       }
 
       case 'CHOOSE_EXPERIENCE':
       return {
         ...state,
-        currentExperience: action.payload.currentExperience
+        experience.status: action.payload.status
       }
 
      default:

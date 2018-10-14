@@ -1,4 +1,4 @@
-import { fetchExperiences } from '../adapters/experiencesAdapter'
+import { fetchExperience } from '../adapters/experiencesAdapter'
 
 export const chooseAudio = (audioSelection) => {
   return {
@@ -7,28 +7,36 @@ export const chooseAudio = (audioSelection) => {
   }
 }
 
-export const loadExperiences = () => {
-    return (dispatch) => {fetchExperiences()
-    .then(experiences => {
-      dispatch(setExperiences(experiences))
+export const loadExperience = () => {
+    return (dispatch) => {fetchExperience()
+    .then(experience => {
+      dispatch(setExperience(experience))
     })
   }
 }
 
-export const setExperiences = (experiences) => {
+export const setExperience = (experience) => {
   return {
-    type: 'LOAD_EXPERIENCES',
+    type: 'LOAD_EXPERIENCE',
     payload: {
-      experiences
+      experience
     }
   }
 }
 
-export const chooseExperience = (currentExperience) => {
-  //This is where we would POST the next current scene and then dispatch it as payload.
+export const startNewExperience = (status) => {
+  //This is where we would PATCH the status of the experience and then dispatch it as payload.
   return {
     type: 'CHOOSE_EXPERIENCE',
-    payload: { currentExperience }
+    payload: { status }
+  }
+}
+
+export const startSavedExperience = (status) => {
+  //This is where we would PATCH the status of the experience and then dispatch it as payload.
+  return {
+    type: 'CHOOSE_EXPERIENCE',
+    payload: { status }
   }
 }
 
