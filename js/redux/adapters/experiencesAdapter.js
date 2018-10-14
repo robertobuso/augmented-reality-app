@@ -7,8 +7,8 @@ export const fetchNewExperience = () => {
   const url = 'https://glacial-peak-72949.herokuapp.com/api/v1/experiences/6'
 
   const data = {
-    flower_one: true,
-    flower_two: true,
+    flower_one: false,
+    flower_two: false,
     flower_three: false,
     drag_book: false,
     take_flower_one: false,
@@ -25,4 +25,22 @@ export const fetchNewExperience = () => {
   }
   return fetch(url, options)
   .then(resp => resp.json())
+}
+
+export const fetchUpdatedAudio = (audioSelection) => {
+  const url = 'https://glacial-peak-72949.herokuapp.com/api/v1/experiences/6'
+
+  const data = { audio: audioSelection }
+
+  const options = {
+    method: 'PATCH',
+    headers: {
+      Accepts: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  }
+  return fetch(url, options)
+  .then(resp => resp.json())
+
 }

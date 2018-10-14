@@ -46,6 +46,7 @@ export default class ViroSample extends Component {
   }
 
   render() {
+    console.log(this.props)
     if (!this.props.start || this.props.start === 'false') {
       return this._startExperience();
     } else {

@@ -1,6 +1,15 @@
-import { fetchExperience, fetchNewExperience } from '../adapters/experiencesAdapter'
+import { fetchExperience, fetchNewExperience, fetchUpdatedAudio } from '../adapters/experiencesAdapter'
 
 export const chooseAudio = (audioSelection) => {
+  return (dispatch) => {
+  fetchUpdatedAudio(audioSelection)
+  .then( audioSelection => {
+    dispatch(setUpdatedAudio(audioSelection))
+    })
+  }
+}
+
+export const setUpdatedAudio = (audioSelection) => {
   return {
     type: 'CHOOSE_AUDIO',
     payload: audioSelection
@@ -33,18 +42,17 @@ export const startNewExperience = (status) => {
   }
 }
 
-export const startSavedExperience = (status) => {
-  //This is where we would PATCH the status of the experience and then dispatch it as payload.
-}
-
 export const setNewExperience = (experience) => {
-  console.log("answer from patch", experience)
   return {
     type: 'CHOOSE_EXPERIENCE',
     payload: {
       experience
      }
   }
+}
+
+export const startSavedExperience = (status) => {
+  //This is where we would PATCH the status of the experience and then dispatch it as payload.
 }
 
 export const setSavedExperience = (status) => {
