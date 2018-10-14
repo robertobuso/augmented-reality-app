@@ -33,7 +33,20 @@ export default class BookScene extends Component {
     return (
       <ViroARScene>
         <ViroSound
-          source={require("../objects/song.mp3")}
+          source={require("../objects/sounds/glass.mp3")}
+          volume={1.0}
+          paused={false}
+        />
+        <ViroSound
+          source={require("../objects/sounds/footsteps.mp3")}
+          volume={1.0}
+          paused={false}/>
+        <ViroSound
+          source={require("../objects/sounds/door_closed.mp3")}
+          volume={1.0}
+          paused={false}/>
+        <ViroSound
+          source={require("../objects/sounds/song.mp3")}
           volume={1.0}
           paused={false}/>
         <ViroARPlane>
