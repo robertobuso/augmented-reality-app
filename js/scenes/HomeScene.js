@@ -71,14 +71,16 @@ const localStyles = StyleSheet.create({
     paddingBottom: 20,
     color:'#fff',
     textAlign:'center',
-    fontSize : 35
+    fontSize : 45,
+    fontFamily : 'Optima'
   },
   flowerText: {
     paddingTop: 30,
     paddingBottom: 20,
     color:'#FF0000',
     textAlign:'center',
-    fontSize : 35
+    fontSize : 45,
+    fontFamily : 'Optima'
   },
   buttonInner: {
     flex : 1,

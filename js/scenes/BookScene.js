@@ -13,7 +13,9 @@ import {
   ViroAmbientLight,
   ViroMaterials,
   ViroSound,
-  ViroNode
+  ViroNode,
+  ViroFlexView,
+  ViroImage
 } from 'react-viro';
 
 export default class BookScene extends Component {
@@ -41,6 +43,21 @@ export default class BookScene extends Component {
   render() {
     return (
       <ViroARScene>
+        <ViroFlexView style={{flexDirection: 'row', position: 'absolute'}}
+          width={1} height={0.05}
+          position={[0, 0.2, -1]}
+        >
+          {/* <ViroImage source={require('../objects/mirror_top.png')} style={{flex: .5}} />
+          </ViroFlexView> */}
+
+        <ViroFlexView style={{flexDirection: 'row', padding: .1, position: 'absolute'}}
+          width={1} height={1}
+          position={[-2, 0.0, -2]}
+          rotation={[0, 45, 0]} >
+          <ViroImage source={require('../objects/ghost.jpg')} style={{flex: .5}} />
+          <ViroImage source={require('../objects/ghost.jpg')} style={{flex: .5}}/>
+        </ViroFlexView>
+
         <ViroSound
           source={require("../objects/sounds/intro_soundtrack.mp3")}
           volume={1.0}
@@ -53,6 +70,7 @@ export default class BookScene extends Component {
         />
         <ViroNode
           position={[0, 0.3, -.05]}>
+
           <ViroARPlane minHeight={.08} minWidth={.01} pauseUpdates={this.state.paused} onPlaneSelected={this.planeSelected}>
             <ViroAmbientLight color="#ffffff"/>
             <ViroText text='Look Behind You'
@@ -61,6 +79,7 @@ export default class BookScene extends Component {
               style={styles.textStyle} />
             <Viro3DObject source={require('../objects/book_obj/objBook.obj')}
               resources={[require('../objects/book_obj/objBook.mtl')]}
+              placeholderSource={require("../objects/book_obj/libro.jpg")}
               position={[0, 0, 0]}
               scale={[0.03,0.03,0.03]}
               dragType="FixedDistance"
@@ -72,7 +91,7 @@ export default class BookScene extends Component {
             <ViroAmbientLight color="#fffeff"/>
             <Viro3DObject source={require('../objects/rose/rose.obj')}
               resources={[require('../objects/rose/rose.mtl')]}
-              position={[10, .1, 3]}
+              position={[15, -0.3, 5]}
               scale={[.04,.04,.04]}
               materials={["rose"]}
               onClick={this.takeRose}

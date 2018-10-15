@@ -1,11 +1,4 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  PixelRatio,
-  TouchableHighlight,
-  Alert
-} from 'react-native';
 
 import { connect } from 'react-redux'
 

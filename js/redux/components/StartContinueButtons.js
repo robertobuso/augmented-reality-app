@@ -64,7 +64,7 @@ const localStyles = StyleSheet.create({
     flexDirection: 'column',
     alignItems:'center',
     backgroundColor: "black",
-    marginTop: 50
+    marginTop: 20
   },
   buttonText: {
     color:'#fff',

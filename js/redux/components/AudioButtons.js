@@ -46,40 +46,14 @@ const localStyles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  outer : {
-    flex : 1,
-    flexDirection: 'row',
-    backgroundColor: "black"
-  },
-  inner: {
-    flex : 1,
-    flexDirection: 'column',
-    alignItems:'center',
-    backgroundColor: "black",
-    marginTop: 300
-  },
-  titleText: {
-    paddingTop: 30,
-    paddingBottom: 20,
-    color:'#fff',
-    textAlign:'center',
-    fontSize : 35
-  },
-  flowerText: {
-    paddingTop: 30,
-    paddingBottom: 20,
-    color:'#FF0000',
-    textAlign:'center',
-    fontSize : 35
+    justifyContent: 'space-evenly',
+    marginTop: 50
   },
   buttonInner: {
     flex : 1,
     flexDirection: 'column',
-    alignItems:'center',
     backgroundColor: "black",
-    marginTop: 50
+    marginTop: 75
   },
   buttonText: {
     color:'#fff',
