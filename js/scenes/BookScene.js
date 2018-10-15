@@ -33,14 +33,12 @@ export default class BookScene extends Component {
   }
 
   takeRose = () => {
-      console.log("Rose taken!")
       this.setState({
         screamPause: false
       })
   }
 
   render() {
-    console.log('local state: ', this.state)
     return (
       <ViroARScene>
         <ViroSound
