@@ -16,7 +16,8 @@ import { chooseAudio } from './js/redux/actions'
 import { loadExperience } from './js/redux/actions'
 
 import {
-  ViroARSceneNavigator
+  ViroARSceneNavigator,
+  ViroSound
 } from 'react-viro';
 
 import HomeScene from './js/scenes/HomeScene.js'
@@ -63,7 +64,7 @@ export default class ViroSample extends Component {
   _getARNavigator = () => {
     return (
       <ViroARSceneNavigator {...this.state.sharedProps}
-        initialScene={{scene: InitialARScene}} />
+        initialScene={{scene: InitialARScene}}/>
     );
   }
 

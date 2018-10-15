@@ -42,9 +42,7 @@ export default class HomeScene extends Component {
               ...
             </Text>
           </Text>
-
           <AudioButtons />
-
           <StartContinueButtons />
         </View>
       </View>

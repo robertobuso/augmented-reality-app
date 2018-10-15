@@ -21,19 +21,19 @@ class AudioButtons extends Component {
           <TouchableHighlight style={localStyles.buttons}
             onPress={() => this.props.chooseAudio('audio')
             }
-            underlayColor={'#68a0ff'} >
+            underlayColor={'#66ff66'} >
             <Text style={localStyles.buttonText}>audio</Text>
           </TouchableHighlight>
           {' '}
           <TouchableHighlight style={localStyles.buttons}
             onPress={() => this.props.chooseAudio('titles')}
-            underlayColor={'#68a0ff'} >
+            underlayColor={'#66ff66'} >
             <Text style={localStyles.buttonText}>titles</Text>
           </TouchableHighlight>
           {' '}
           <TouchableHighlight style={localStyles.buttons}
             onPress={(event) => this.props.chooseAudio('both')}
-            underlayColor={'#68a0ff'}>
+            underlayColor={'#66ff66'}>
             <Text style={localStyles.buttonText}>both</Text>
           </TouchableHighlight>
         </View>

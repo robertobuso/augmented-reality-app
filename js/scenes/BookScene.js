@@ -19,14 +19,15 @@ export default class BookScene extends Component {
 
   constructor() {
     super();
-
-    // Set initial state here
     this.state = {
-      text : "Initializing AR..."
-    };
+        paused: false,
+      }
+  }
 
-    // bind 'this' to functions
-    this._onInitialized = this._onInitialized.bind(this);
+  planeSelected = (anchor) => {
+    this.setState({
+      paused : true
+    })
   }
 
   render() {
@@ -37,47 +38,43 @@ export default class BookScene extends Component {
           volume={1.0}
           paused={false}
         />
-        <ViroARPlane>
+        <ViroARPlane minHeight={.08} minWidth={.01} pauseUpdates={this.state.paused} onPlaneSelected={this.planeSelected}>
           <ViroAmbientLight color="#ffffff"/>
+          <ViroText text='Look Behind You'
+            scale={[.2, .2, .2]}
+            position={[0, 0.25, -.05]}
+            rotation={[5, 0, 0]}
+            style={styles.textStyle} />
           <Viro3DObject source={require('../objects/book_obj/objBook.obj')}
             resources={[require('../objects/book_obj/objBook.mtl')]}
-            position={[0, -0.5, -1]}
+            position={[0, 0.3, -.05]}
             scale={[0.03,0.03,0.03]}
-            materials={["book"]}
             dragType="FixedDistance"
             onDrag={()=>{}}
+            rotation={[5, 0, 0]}
+            materials={["book"]}
           type="OBJ"/>
         </ViroARPlane>
       </ViroARScene>
-    );
-  }
-
-  _onInitialized(state, reason) {
-    if (state == ViroConstants.TRACKING_NORMAL) {
-      this.setState({
-        text : "Hello World!"
-      });
-    } else if (state == ViroConstants.TRACKING_NONE) {
-      // Handle loss of tracking
-    }
+    )
   }
 }
-
-var styles = StyleSheet.create({
-  helloWorldTextStyle: {
-    fontFamily: 'Arial',
-    fontSize: 30,
-    color: '#ffffff',
-    textAlignVertical: 'center',
-    textAlign: 'center',
-  },
-});
 
 ViroMaterials.createMaterials({
   book: {
      diffuseTexture: require('../objects/book_obj/libro.jpg'),
      specularTexture: require('../objects/book_obj/libroEspecular.jpg')
-   },
+   }
+})
+
+const styles = StyleSheet.create({
+  textStyle: {
+    fontFamily: 'Arial',
+    fontSize: 20,
+    color: '#ff0000',
+    textAlignVertical: 'center',
+    textAlign: 'center',
+  },
 });
 
 module.exports = BookScene;
