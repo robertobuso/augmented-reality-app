@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 import {
   ViroARScene,
@@ -15,7 +15,8 @@ import {
   ViroSound,
   ViroNode,
   ViroFlexView,
-  ViroImage
+  ViroImage,
+  ViroARCamera
 } from 'react-viro';
 
 export default class BookScene extends Component {
@@ -42,64 +43,61 @@ export default class BookScene extends Component {
 
   render() {
     return (
-      <ViroARScene>
-        <ViroFlexView style={{flexDirection: 'row', position: 'absolute'}}
-          width={1} height={0.05}
-          position={[0, 0.2, -1]}
-        >
-          {/* <ViroImage source={require('../objects/mirror_top.png')} style={{flex: .5}} />
-          </ViroFlexView> */}
+        <ViroARScene>
+          <ViroARCamera>
+            <ViroFlexView
+              position={[1.25, 1.9, -6]} rotation={[0, -15, 0]} height={2} width={4}>
+              <ViroImage source={require('../objects/ghost.jpg')} style={{flex: .5}}/>
+            </ViroFlexView>
+          </ViroARCamera>
 
-        <ViroFlexView style={{flexDirection: 'row', padding: .1, position: 'absolute'}}
-          width={1} height={1}
-          position={[-2, 0.0, -2]}
-          rotation={[0, 45, 0]} >
-          <ViroImage source={require('../objects/ghost.jpg')} style={{flex: .5}} />
-          <ViroImage source={require('../objects/ghost.jpg')} style={{flex: .5}}/>
-        </ViroFlexView>
-
-        <ViroSound
-          source={require("../objects/sounds/intro_soundtrack.mp3")}
-          volume={1.0}
-          paused={false}
-        />
-        <ViroSound
-          paused={this.state.screamPause}
-          source={require("../objects/sounds/scream_one.mp3")}
-          volume={1.0}
-        />
-        <ViroNode
-          position={[0, 0.3, -.05]}>
-
-          <ViroARPlane minHeight={.08} minWidth={.01} pauseUpdates={this.state.paused} onPlaneSelected={this.planeSelected}>
-            <ViroAmbientLight color="#ffffff"/>
-            <ViroText text='Look Behind You'
-              scale={[.2, .2, .2]}
-              position={[0, -0.05, 0]}
-              style={styles.textStyle} />
-            <Viro3DObject source={require('../objects/book_obj/objBook.obj')}
-              resources={[require('../objects/book_obj/objBook.mtl')]}
-              placeholderSource={require("../objects/book_obj/libro.jpg")}
-              position={[0, 0, 0]}
-              scale={[0.03,0.03,0.03]}
-              dragType="FixedDistance"
-              onDrag={()=>{}}
-              materials={["book"]}
-            type="OBJ"/>
-          </ViroARPlane>
-          <ViroARPlane>
+          <ViroSound
+            source={require("../objects/sounds/intro_soundtrack.mp3")}
+            volume={1.0}
+            paused={false}
+          />
+          <ViroSound
+            paused={this.state.screamPause}
+            source={require("../objects/sounds/scream_one.mp3")}
+            volume={1.0}
+          />
+          <ViroNode
+            position={[0, 0.3, -.05]}>
+            <ViroARPlane
+              minHeight={0.5}
+              minWidth={0.5}
+              alignment={'Horizontal'}
+              pauseUpdates={this.state.paused}
+              onPlaneSelected={this.planeSelected}>
+              <ViroAmbientLight color="#ffffff"/>
+              <ViroText text='Look Behind You'
+                scale={[.2, .2, .2]}
+                position={[0, -0.05, 0]}
+                rotation={[0,10,0]}
+                style={styles.textStyle} />
+              <Viro3DObject source={require('../objects/book_obj/objBook.obj')}
+                resources={[require('../objects/book_obj/objBook.mtl')]}
+                placeholderSource={require("../objects/book_obj/libro.jpg")}
+                position={[0, 0, 0]}
+                scale={[0.03,0.03,0.03]}
+                dragType="FixedDistance"
+                onDrag={()=>{}}
+                materials={["book"]}
+              type="OBJ"/>
+            </ViroARPlane>
             <ViroAmbientLight color="#fffeff"/>
             <Viro3DObject source={require('../objects/rose/rose.obj')}
               resources={[require('../objects/rose/rose.mtl')]}
-              position={[15, -0.3, 5]}
+              position={[15, -0.8, 7]}
               scale={[.04,.04,.04]}
               materials={["rose"]}
               onClick={this.takeRose}
+              dragType="FixedDistance"
+              onDrag={()=>{}}
             type="OBJ"/>
+          </ViroNode>
+        </ViroARScene>
 
-          </ViroARPlane>
-        </ViroNode>
-      </ViroARScene>
     )
   }
 }
@@ -127,6 +125,12 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
     textAlign: 'center',
   },
-});
+  container: {
+    flex: 1,
+    borderRadius: 15,
+    borderWidth: 10,
+    borderColor: 'red'
+  }
+})
 
 module.exports = BookScene;
