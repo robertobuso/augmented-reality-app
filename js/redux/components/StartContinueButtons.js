@@ -31,6 +31,7 @@ class StartContinueButtons extends Component {
   }
 
   render() {
+    console.log('status: ', this.props.status)
     return(
       <View style={localStyles.buttonInner}>
         <View style={localStyles.container}>
@@ -41,8 +42,8 @@ class StartContinueButtons extends Component {
           </TouchableHighlight>
         </View>
 
-        {this.props.experience ?
-          this.props.experience.status === 'saved' ?
+        {this.props ?
+          this.props.status === 'saved' ?
             <View style={localStyles.buttonInner}>
               <TouchableHighlight style={localStyles.buttons}
                 onPress={(event) => this._handleStartButton('continue')}

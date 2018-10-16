@@ -157,7 +157,7 @@ ViroAnimations.registerAnimations({
 ViroAnimations.registerAnimations({
     fadeIn:{properties:{opacity: 1},
                   easing:"Linear",
-                  duration: 10000},
+                  duration: 9000},
 })
 
 const styles = StyleSheet.create({
