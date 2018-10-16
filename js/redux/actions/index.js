@@ -1,4 +1,4 @@
-import { fetchExperience, fetchNewExperience, fetchUpdatedAudio } from '../adapters/experiencesAdapter'
+import { fetchExperience, fetchNewExperience, fetchUpdatedAudio, fetchUpdatedFlower } from '../adapters/experiencesAdapter'
 
 export const chooseAudio = (audioSelection) => {
   return (dispatch) => {
@@ -59,6 +59,29 @@ export const startSavedExperience = (status) => {
     }
   }
 }
+
+export const takeFlower = (flower) => {
+    return (dispatch) => {
+    fetchUpdatedFlower()
+    .then( experience => {
+      dispatch(setUpdatedFlower(flower))
+    })
+  }
+}
+
+export const setUpdatedFlower = (flower) => {
+  return {
+    type: 'TAKE_FLOWER',
+    payload: {
+      flower: flower
+     }
+  }
+}
+
+export const completeTask = (task) => {
+  return(dispatch) => {console.log("Completed Task!", task)}
+}
+
 
 // completeTask
 // addItem

@@ -39,6 +39,12 @@ const reducer = (state = initialState, action) => {
         take_flower_one: action.payload.experience.take_flower_one
       }
 
+      case 'TAKE_FLOWER':
+        return {
+          ...state,
+          [action.payload.flower]: true
+        }
+
      default:
        return state
    }

@@ -42,5 +42,22 @@ export const fetchUpdatedAudio = (audioSelection) => {
   }
   return fetch(url, options)
   .then(resp => resp.json())
+}
 
+export const fetchUpdatedFlower = (flower) => {
+  const url = 'https://glacial-peak-72949.herokuapp.com/api/v1/experiences/6'
+
+  const data = { flower: true }
+
+  const options = {
+    method: 'PATCH',
+    headers: {
+      Accepts: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  }
+  console.log('data is: ', data)
+  return fetch(url, options)
+  .then(resp => resp.json())
 }

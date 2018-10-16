@@ -17,6 +17,8 @@ const WrappedApp = () => (
   </Provider>
 )
 
+console.disableYellowBox = true
+
 AppRegistry.registerComponent('Mod5Frontend', () => WrappedApp
 );
 

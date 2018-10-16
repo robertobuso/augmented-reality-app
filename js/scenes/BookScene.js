@@ -20,6 +20,11 @@ import {
   ViroAnimations
 } from 'react-viro';
 
+import { connect } from 'react-redux'
+
+import { takeFlower, completeTask } from '../redux/actions'
+
+
 export default class BookScene extends Component {
 
   constructor() {
@@ -42,16 +47,17 @@ export default class BookScene extends Component {
       this.setState({
         screamPause: false,
         takeRose: true
-      })
+      }, () => this.props.takeFlower('flower_one'))
   }
 
   roseOnChest = () => {
     this.setState({
       roseOnChest: true
-    })
+    }, () => this.props.completeTask('take_flower_one'))
   }
 
   render() {
+    console.log('Redux State:', this.props)
     return (
         <ViroARScene>
           {this.state.roseOnChest === false ?
@@ -95,11 +101,7 @@ export default class BookScene extends Component {
               <ViroText text='Look Behind You'
                 scale={[.2, .2, .2]}
                 position={[0, -0.05, 0]}
-                rotation={[0,10,0]}
-                // width={20}
-                // height={5}
-                // extrusionDepth={8}
-                // materials={["frontMaterial", 'backMaterial', 'sideMaterial']}
+                rotation={[10,10,0]}
                 style={styles.textStyle} />
 
               <Viro3DObject source={require('../objects/book_obj/objBook.obj')}
@@ -116,7 +118,7 @@ export default class BookScene extends Component {
             <ViroAmbientLight color="#fffeff"/>
             <Viro3DObject source={require('../objects/rose/rose.obj')}
               resources={[require('../objects/rose/rose.mtl')]}
-              position={[15, -1.2, 7]}
+              position={[15, -1.8, 7]}
               scale={[.04,.04,.04]}
               materials={["rose"]}
               onClick={this.takeRose}
@@ -146,7 +148,7 @@ ViroMaterials.createMaterials({
 })
 
 ViroAnimations.registerAnimations({
-    animateImage:{properties:{positionX:-3, positionY:-8,
+    animateImage:{properties:{positionX:-3, positionY:-8.5,
                               opacity: 0},
                   easing:"EaseIn",
                   duration: 3000},
@@ -178,5 +180,10 @@ ViroMaterials.createMaterials({
     sideMaterial: {
       diffuseColor: '#ff0000',
     },
-});
-module.exports = BookScene;
+})
+
+const mapStateToProps = (state) => {
+  return state
+}
+
+module.exports =  connect(mapStateToProps, { takeFlower, completeTask } )(BookScene)
