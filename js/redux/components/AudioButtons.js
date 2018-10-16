@@ -8,8 +8,7 @@ import {
   Text,
   View,
   StyleSheet,
-  TouchableHighlight,
-  Alert
+  TouchableHighlight
 } from 'react-native';
 
 class AudioButtons extends Component {
@@ -72,7 +71,8 @@ const localStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#fff',
   }
-});
+})
+
 const mapStateToProps = (state) => {
   return state
 }

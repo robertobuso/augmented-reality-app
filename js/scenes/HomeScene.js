@@ -3,27 +3,15 @@
 import React, { Component } from 'react';
 
 import {
-  Text,
   View,
-  StyleSheet,
-  TouchableHighlight,
-  Alert
+  StyleSheet
 } from 'react-native';
-
-import {
-  ViroARScene,
-  ViroText,
-  ViroConstants,
-  ViroARPlane,
-  Viro3DObject,
-  ViroAmbientLight,
-  ViroMaterials
-} from 'react-viro';
 
 import { connect } from 'react-redux'
 
 import StartContinueButtons from '../redux/components/StartContinueButtons.js'
 import AudioButtons from '../redux/components/AudioButtons.js'
+import MainTitle from '../redux/components/MainTitle.js'
 
 export default class HomeScene extends Component {
   render() {
@@ -31,15 +19,7 @@ export default class HomeScene extends Component {
     return (
       <View style={localStyles.outer} >
         <View style={localStyles.inner} >
-          <Text style={localStyles.titleText}>
-            They May Cut All the{' '}
-            <Text style={localStyles.flowerText}>
-              Flowers
-            </Text>
-            <Text style={localStyles.titleText}>
-              ...
-            </Text>
-          </Text>
+          <MainTitle />
           <AudioButtons />
           <StartContinueButtons />
         </View>
@@ -65,48 +45,8 @@ const localStyles = StyleSheet.create({
     alignItems:'center',
     backgroundColor: "black",
     marginTop: 300
-  },
-  titleText: {
-    paddingTop: 30,
-    paddingBottom: 20,
-    color:'#fff',
-    textAlign:'center',
-    fontSize : 45,
-    fontFamily : 'Optima'
-  },
-  flowerText: {
-    paddingTop: 30,
-    paddingBottom: 20,
-    color:'#FF0000',
-    textAlign:'center',
-    fontSize : 45,
-    fontFamily : 'Optima'
-  },
-  buttonInner: {
-    flex : 1,
-    flexDirection: 'column',
-    alignItems:'center',
-    backgroundColor: "black",
-    marginTop: 50
-  },
-  buttonText: {
-    color:'#fff',
-    textAlign:'center',
-    fontSize : 20
-  },
-  buttons : {
-    height: 50,
-    width: 100,
-    paddingTop:10,
-    paddingBottom:10,
-    marginTop: 5,
-    marginBottom: 5,
-    backgroundColor:'#68a0cf',
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#fff',
   }
-});
+})
 
 const mapStateToProps = (state) => {
   return state

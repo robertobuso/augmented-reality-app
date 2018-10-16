@@ -7,7 +7,6 @@ import {StyleSheet, View} from 'react-native';
 import {
   ViroARScene,
   ViroText,
-  ViroConstants,
   ViroARPlane,
   Viro3DObject,
   ViroAmbientLight,
@@ -16,7 +15,9 @@ import {
   ViroNode,
   ViroFlexView,
   ViroImage,
-  ViroARCamera
+  ViroARCamera,
+  ViroAnimatedImage,
+  ViroAnimations
 } from 'react-viro';
 
 export default class BookScene extends Component {
@@ -25,7 +26,8 @@ export default class BookScene extends Component {
     super();
     this.state = {
         paused: false,
-        screamPause: true
+        screamPause: true,
+        takeRose: false
       }
   }
 
@@ -37,8 +39,13 @@ export default class BookScene extends Component {
 
   takeRose = () => {
       this.setState({
-        screamPause: false
+        screamPause: false,
+        takeRose: true
       })
+  }
+
+  handleCollision = () => {
+    console.log('COLLIDED!!!')
   }
 
   render() {
@@ -46,8 +53,10 @@ export default class BookScene extends Component {
         <ViroARScene>
           <ViroARCamera>
             <ViroFlexView
-              position={[1.25, 1.9, -6]} rotation={[0, -15, 0]} height={2} width={4}>
-              <ViroImage source={require('../objects/ghost.jpg')} style={{flex: .5}}/>
+              position={[-1, -1.5, -5]}
+              height={1.5}
+              width={3}>
+              <ViroAnimatedImage source={require('../objects/rain.gif')} />
             </ViroFlexView>
           </ViroARCamera>
 
@@ -74,7 +83,12 @@ export default class BookScene extends Component {
                 scale={[.2, .2, .2]}
                 position={[0, -0.05, 0]}
                 rotation={[0,10,0]}
+                width={20}
+                height={5}
+                extrusionDepth={8}
+                materials={["frontMaterial", 'backMaterial', 'sideMaterial']}
                 style={styles.textStyle} />
+
               <Viro3DObject source={require('../objects/book_obj/objBook.obj')}
                 resources={[require('../objects/book_obj/objBook.mtl')]}
                 placeholderSource={require("../objects/book_obj/libro.jpg")}
@@ -85,16 +99,19 @@ export default class BookScene extends Component {
                 materials={["book"]}
               type="OBJ"/>
             </ViroARPlane>
+
             <ViroAmbientLight color="#fffeff"/>
             <Viro3DObject source={require('../objects/rose/rose.obj')}
               resources={[require('../objects/rose/rose.mtl')]}
-              position={[15, -0.8, 7]}
+              position={[15, -1.2, 7]}
               scale={[.04,.04,.04]}
               materials={["rose"]}
               onClick={this.takeRose}
               dragType="FixedDistance"
               onDrag={()=>{}}
+              animation={{name:'animateImage', run:this.state.takeRose}}
             type="OBJ"/>
+
           </ViroNode>
         </ViroARScene>
 
@@ -115,22 +132,34 @@ ViroMaterials.createMaterials({
      diffuseTexture: require('../objects/rose/rose_texture.jpg'),
      specularTexture: require('../objects/rose/rose_texture.jpg')
    },
-});
+})
+
+ViroAnimations.registerAnimations({
+    animateImage:{properties:{scaleX:0.5, scaleY:0.5, scaleZ:0.5,
+                              opacity: 1.0},
+                  easing:"Bounce",
+                  duration: 10000},
+})
 
 const styles = StyleSheet.create({
   textStyle: {
     fontFamily: 'Arial',
-    fontSize: 20,
+    fontSize: 14,
     color: '#ff0000',
     textAlignVertical: 'center',
     textAlign: 'center',
-  },
-  container: {
-    flex: 1,
-    borderRadius: 15,
-    borderWidth: 10,
-    borderColor: 'red'
   }
 })
 
+ViroMaterials.createMaterials({
+    frontMaterial: {
+      diffuseColor: '#FFFFFF',
+    },
+    backMaterial: {
+      diffuseColor: '#FF0000',
+    },
+    sideMaterial: {
+      diffuseColor: '#ff0000',
+    },
+});
 module.exports = BookScene;
