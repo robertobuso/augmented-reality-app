@@ -62,8 +62,8 @@ export const startSavedExperience = (status) => {
 
 export const takeFlower = (flower) => {
     return (dispatch) => {
-    fetchUpdatedFlower()
-    .then( experience => {
+    fetchUpdatedFlower(flower)
+    .then( flower => {
       dispatch(setUpdatedFlower(flower))
     })
   }

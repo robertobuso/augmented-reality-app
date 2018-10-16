@@ -47,8 +47,9 @@ export const fetchUpdatedAudio = (audioSelection) => {
 export const fetchUpdatedFlower = (flower) => {
   const url = 'https://glacial-peak-72949.herokuapp.com/api/v1/experiences/6'
 
-  const data = { flower: true }
-
+  const data = { status: 'saved',
+                [`${flower}`]: true }
+console.log('Data is: ', data)
   const options = {
     method: 'PATCH',
     headers: {
@@ -57,7 +58,7 @@ export const fetchUpdatedFlower = (flower) => {
     },
     body: JSON.stringify(data)
   }
-  console.log('data is: ', data)
   return fetch(url, options)
   .then(resp => resp.json())
+  .then(r => console.log('JSON response is: ', r))
 }
