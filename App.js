@@ -14,8 +14,9 @@ const sharedProps = {
   apiKey:"1A853839-79AE-41CD-9C29-B554308C3C81",
 }
 
-const InitialARScene = require('./js/scenes/BookScene');
+const BookScene = require('./js/scenes/BookScene')
 
+const DoorScene = require('./js/scenes/DoorScene')
 
 export default class ViroSample extends Component {
 
@@ -28,9 +29,15 @@ export default class ViroSample extends Component {
   render() {
     if (!this.props.start || this.props.start === 'false') {
       return <HomeScene />
-    } else {
+    } else if (this.props.flower_one === true) {
       return <ViroARSceneNavigator {...this.state.sharedProps}
-        initialScene={{scene: InitialARScene}}/>
+        initialScene={{scene: DoorScene}}/>
+      } else if (this.props.flower_two === true) {
+        return <ViroARSceneNavigator {...this.state.sharedProps}
+          initialScene={{scene: FinalScene}}/>
+      } else  {
+          return <ViroARSceneNavigator {...this.state.sharedProps}
+            initialScene={{scene: BookScene}}/>
     }
   }
 }

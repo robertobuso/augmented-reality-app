@@ -51,11 +51,11 @@ export const setNewExperience = (experience) => {
   }
 }
 
-export const startSavedExperience = (status) => {
+export const startSavedExperience = (experience) => {
   return {
     type: 'CHOOSE_EXPERIENCE',
     payload: {
-    status: status
+    experience: experience
     }
   }
 }

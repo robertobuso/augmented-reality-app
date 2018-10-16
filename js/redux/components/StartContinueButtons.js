@@ -27,10 +27,11 @@ class StartContinueButtons extends Component {
 } else if (response === 'start') {
   this.props.startNewExperience('new')
 } else if (response === 'continue')
-  this.props.startSavedExperience('saved')
+  this.props.startSavedExperience(this.props)
   }
 
   render() {
+    console.log('Props: ', this.props)
     return(
       <View style={localStyles.buttonInner}>
         <View style={localStyles.container}>

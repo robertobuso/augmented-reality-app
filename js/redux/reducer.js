@@ -21,10 +21,14 @@ const reducer = (state = initialState, action) => {
       case 'LOAD_EXPERIENCE':
       return {
         ...state,
+        start: false,
         status: action.payload.experience[0].status,
         audio: action.payload.experience[0].audio,
-        tasks: action.payload.experience[0].tasks,
-        items: action.payload.experience[0].items
+        flower_one: action.payload.experience[0].flower_one,
+        flower_two: action.payload.experience[0].flower_two,
+        flower_three: action.payload.experience[0].flower_three,
+        drag_book: action.payload.experience[0].drag_book,
+        take_flower_one: action.payload.experience[0].take_flower_one
       }
 
       case 'CHOOSE_EXPERIENCE':
