@@ -57,13 +57,13 @@ export default class BookScene extends Component {
       roseOnChest: true
     }, () => this.props.completeTask('take_flower_one'))
 
-    // this.props.arSceneNavigator.resetARSession({resetTracking: true}, {removeAnchors: true})
+    this.props.arSceneNavigator.resetARSession(true, true)
 
     this.props.arSceneNavigator.push({scene:DoorScene})
   }
 
   render() {
-    console.log('Redux State:', this.props)
+    console.log('props:', this.props)
     return (
         <ViroARScene>
           {this.state.roseOnChest === false ?

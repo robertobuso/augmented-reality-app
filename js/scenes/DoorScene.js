@@ -50,8 +50,8 @@ export default class DoorScene extends Component {
           <Viro3DObject source={require('../objects/door/OBJ/door.obj')}
             resources={[require('../objects/door/OBJ/door.mtl')]}
             materials={["door"]}
-            position={[0, -0.5, -3]}
-            scale={[.2,.2,.2]}
+            position={[0, -0.5, -2]}
+            scale={[.5,.5,.5]}
             dragType="FixedDistance"
             onDrag={()=>{}}
           type="OBJ"/>
