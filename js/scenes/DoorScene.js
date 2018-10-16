@@ -45,6 +45,25 @@ export default class DoorScene extends Component {
   render() {
     return (
       <ViroARScene>
+        {this.props.flower_one === false ?
+          <ViroARCamera>
+            <ViroFlexView
+              position={[1, -1.4, -5]}
+              height={0.5}
+              width={0.5}>
+              <ViroImage source={require('../objects/chest.png')} />
+            </ViroFlexView>
+          </ViroARCamera>
+        :
+        <ViroARCamera>
+          <ViroFlexView
+            position={[1, -1.4, -5]}
+            height={0.5}
+            width={0.5}>
+            <ViroImage source={require('../objects/rose_in_chest.png')} />
+          </ViroFlexView>
+        </ViroARCamera>
+        }
         <ViroARPlane>
           <ViroAmbientLight color="#ffffff"/>
           <Viro3DObject source={require('../objects/door/OBJ/door.obj')}

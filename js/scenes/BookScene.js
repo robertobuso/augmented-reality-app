@@ -46,16 +46,15 @@ export default class BookScene extends Component {
   takeRose = () => {
       this.setState({
         screamPause: false,
-        takeRose: true
+        takeRose: true,
+        roseOnChest: true
       }, () => this.props.takeFlower('flower_one'))
   }
 
   roseOnChest = () => {
     const DoorScene = require('./DoorScene.js')
 
-    this.setState({
-      roseOnChest: true
-    }, () => this.props.completeTask('take_flower_one'))
+    this.props.completeTask('take_flower_one')
 
     this.props.arSceneNavigator.resetARSession(true, true)
 
