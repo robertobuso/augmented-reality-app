@@ -51,9 +51,15 @@ export default class BookScene extends Component {
   }
 
   roseOnChest = () => {
+    const DoorScene = require('./DoorScene.js')
+
     this.setState({
       roseOnChest: true
     }, () => this.props.completeTask('take_flower_one'))
+
+    // this.props.arSceneNavigator.resetARSession({resetTracking: true}, {removeAnchors: true})
+
+    this.props.arSceneNavigator.push({scene:DoorScene})
   }
 
   render() {
@@ -157,7 +163,7 @@ ViroAnimations.registerAnimations({
 ViroAnimations.registerAnimations({
     fadeIn:{properties:{opacity: 1},
                   easing:"Linear",
-                  duration: 9000},
+                  duration: 6000},
 })
 
 const styles = StyleSheet.create({

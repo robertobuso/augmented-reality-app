@@ -31,7 +31,6 @@ class StartContinueButtons extends Component {
   }
 
   render() {
-    console.log('status: ', this.props.status)
     return(
       <View style={localStyles.buttonInner}>
         <View style={localStyles.container}>

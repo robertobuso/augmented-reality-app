@@ -45,6 +45,12 @@ const reducer = (state = initialState, action) => {
           [action.payload.flower]: true
         }
 
+        case 'COMPLETE_TASK':
+          return {
+            ...state,
+            [action.payload.task]: true
+          }
+
      default:
        return state
    }

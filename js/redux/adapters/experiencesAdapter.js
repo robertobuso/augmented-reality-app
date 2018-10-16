@@ -60,5 +60,21 @@ console.log('Data is: ', data)
   }
   return fetch(url, options)
   .then(resp => resp.json())
-  .then(r => console.log('JSON response is: ', r))
+}
+
+export const fetchUpdatedTask = (task) => {
+  const url = 'https://glacial-peak-72949.herokuapp.com/api/v1/experiences/6'
+
+  const data = { [`${task}`]: true }
+console.log('Data is: ', data)
+  const options = {
+    method: 'PATCH',
+    headers: {
+      Accepts: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  }
+  return fetch(url, options)
+  .then(resp => resp.json())
 }
