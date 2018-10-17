@@ -139,9 +139,9 @@ export default class BookScene extends Component {
             {this.state.roseOnChest === true ?
               <ViroButton
                 source={require("../objects/continue.png")}
-                position={[1,1,-3]}
-                height={2}
-                width={3}
+                position={[1,0,-4]}
+                height={1}
+                width={1.5}
                 onClick={this.nextScene}
               /> : null }
           </ViroNode>

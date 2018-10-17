@@ -61,17 +61,20 @@ export default class DoorScene extends Component {
           </ViroFlexView>
         </ViroARCamera>
         }
-        <ViroARPlane>
-          <ViroAmbientLight color="#ffffff"/>
-          <Viro3DObject source={require('../objects/door/OBJ/door.obj')}
-            resources={[require('../objects/door/OBJ/door.mtl')]}
-            materials={["door"]}
-            position={[0, -0.5, -2]}
-            scale={[.5,.5,.5]}
-            dragType="FixedDistance"
-            onDrag={()=>{}}
-          type="OBJ"/>
-        </ViroARPlane>
+
+        <ViroFlexView
+          style={{flexDirection: 'row', padding: 1}}
+          width={10} height={5}
+          position={[0.1, 0, -10]}
+          rotation={[0, 33, 0]} >
+          <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
+          <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
+          <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
+          <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
+          <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
+        </ViroFlexView>
+
+
       </ViroARScene>
     )
   }
