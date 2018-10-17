@@ -16,8 +16,8 @@ import {
   ViroFlexView,
   ViroImage,
   ViroARCamera,
-  ViroAnimatedImage,
-  ViroAnimations
+  ViroAnimations,
+  ViroButton
 } from 'react-viro';
 
 import { connect } from 'react-redux'
@@ -44,28 +44,33 @@ export default class BookScene extends Component {
   }
 
   takeRose = () => {
+    // setTimeout(this.setState({
+    //   screamPause: false,
+    //   takeRose: true}), 2500)
       this.setState({
         screamPause: false,
-        takeRose: true,
-        roseOnChest: true
-      }, () => this.props.takeFlower('flower_one'))
+        takeRose: true})
   }
 
   roseOnChest = () => {
-    const DoorScene = require('./DoorScene.js')
-
     this.props.completeTask('take_flower_one')
+    this.props.takeFlower('flower_one')
+    this.setState({
+      roseOnChest: true
+    })
+  }
 
+  nextScene = () => {
+    const DoorScene = require('./DoorScene.js')
     this.props.arSceneNavigator.resetARSession(true, true)
-
     this.props.arSceneNavigator.push({scene:DoorScene})
   }
 
   render() {
-    console.log('props:', this.props)
+        console.log('first scene props: ', this.props)
     return (
         <ViroARScene>
-          {this.state.roseOnChest === false ?
+          {this.state.takeRose === false ?
             <ViroARCamera>
               <ViroFlexView
                 position={[1, -1.4, -5]}
@@ -123,7 +128,7 @@ export default class BookScene extends Component {
             <ViroAmbientLight color="#fffeff"/>
             <Viro3DObject source={require('../objects/rose/rose.obj')}
               resources={[require('../objects/rose/rose.mtl')]}
-              position={[15, -1.8, 7]}
+              position={[15, -3, 5]}
               scale={[.04,.04,.04]}
               materials={["rose"]}
               onClick={this.takeRose}
@@ -131,6 +136,14 @@ export default class BookScene extends Component {
               onDrag={()=>{}}
               animation={{name:'animateImage', run:this.state.takeRose, onFinish:this.roseOnChest}}
             type="OBJ"/>
+            {this.state.roseOnChest === true ?
+              <ViroButton
+                source={require("../objects/continue.png")}
+                position={[1,1,-3]}
+                height={2}
+                width={3}
+                onClick={this.nextScene}
+              /> : null }
           </ViroNode>
         </ViroARScene>
     )
@@ -153,10 +166,10 @@ ViroMaterials.createMaterials({
 })
 
 ViroAnimations.registerAnimations({
-    animateImage:{properties:{positionX:-3, positionY:-8.5,
-                              opacity: 0},
-                  easing:"EaseIn",
-                  duration: 3000},
+    animateImage:{properties:{positionX:-3, positionY:-8.5,opacity: 0}, easing:"EaseIn", duration: 2000},
+    growFlower: {properties:{scaleX:0.2, scaleY:0.2, scaleZ:0.2, opacity: 1.0}, easing:"Linear", duration: 3000},
+    minimizeFlower: {properties:{scaleX:-0.3, scaleY:-0.3, scaleZ:-0.3, opacity: 1.0}, easing:"Linear", duration: 3000},
+    growAndAnimateFlower: [["growFlower", "minimizeFlower", "animateImage"]]
 })
 
 ViroAnimations.registerAnimations({

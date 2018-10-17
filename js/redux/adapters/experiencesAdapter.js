@@ -41,15 +41,14 @@ export const fetchUpdatedAudio = (audioSelection) => {
     body: JSON.stringify(data)
   }
   return fetch(url, options)
-  .then(resp => resp.json())
 }
 
 export const fetchUpdatedFlower = (flower) => {
   const url = 'https://glacial-peak-72949.herokuapp.com/api/v1/experiences/6'
 
-  const data = { status: 'saved',
-                [`${flower}`]: true }
-console.log('Data is: ', data)
+  const data = { [`${flower}`]: true,
+                  status: 'saved'}
+
   const options = {
     method: 'PATCH',
     headers: {
@@ -65,8 +64,9 @@ console.log('Data is: ', data)
 export const fetchUpdatedTask = (task) => {
   const url = 'https://glacial-peak-72949.herokuapp.com/api/v1/experiences/6'
 
-  const data = { [`${task}`]: true }
-console.log('Data is: ', data)
+  const data = { [`${task}`]: true,
+                  status: 'saved' }
+
   const options = {
     method: 'PATCH',
     headers: {

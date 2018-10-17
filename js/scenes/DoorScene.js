@@ -16,23 +16,19 @@ import {
   ViroFlexView,
   ViroImage,
   ViroARCamera,
-  ViroAnimatedImage,
   ViroAnimations
 } from 'react-viro';
 
 import { connect } from 'react-redux'
 
-import { takeFlower, completeTask } from '../redux/actions'
-
+import { takeFlower, completeTask, loadExperience } from '../redux/actions'
 
 export default class DoorScene extends Component {
 
   constructor() {
     super();
     this.state = {
-        paused: false,
-        takeRose: false,
-        roseOnChest: false
+        paused: false
       }
   }
 
@@ -43,6 +39,7 @@ export default class DoorScene extends Component {
   }
 
   render() {
+    console.log('second scene props: ', this.props)
     return (
       <ViroARScene>
         {this.props.flower_one === false ?
@@ -103,4 +100,4 @@ const mapStateToProps = (state) => {
   return state
 }
 
-module.exports =  connect(mapStateToProps, { takeFlower, completeTask } )(DoorScene)
+module.exports =  connect(mapStateToProps, { takeFlower, completeTask, loadExperience } )(DoorScene)

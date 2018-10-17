@@ -63,7 +63,7 @@ export const startSavedExperience = (experience) => {
 export const takeFlower = (flower) => {
     return (dispatch) => {
     fetchUpdatedFlower(flower)
-    .then( flower => {
+    .then( flowerObj => {
       dispatch(setUpdatedFlower(flower))
     })
   }
@@ -81,7 +81,7 @@ export const setUpdatedFlower = (flower) => {
 export const completeTask = (task) => {
     return (dispatch) => {
     fetchUpdatedTask(task)
-    .then( task => {
+    .then( taskObj => {
       dispatch(setUpdatedTask(task))
     })
   }

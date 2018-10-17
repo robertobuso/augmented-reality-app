@@ -44,15 +44,19 @@ const reducer = (state = initialState, action) => {
       }
 
       case 'TAKE_FLOWER':
+      console.log('inside take flower: ', action.payload.flower)
         return {
           ...state,
-          [action.payload.flower]: true
+          [action.payload.flower]: true,
+          status: 'saved'
         }
 
         case 'COMPLETE_TASK':
+        console.log('inside complete task: ', action.payload.task)
           return {
             ...state,
-            [action.payload.task]: true
+            [action.payload.task]: true,
+            status: 'saved'
           }
 
      default:
