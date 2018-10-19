@@ -34,7 +34,8 @@ export default class BookScene extends Component {
         screamPause: true,
         takeRose: false,
         roseOnChest: false,
-        bookLoaded: false
+        bookLoaded: false,
+        bookAudio: true
       }
   }
 
@@ -69,11 +70,21 @@ export default class BookScene extends Component {
 
   bookIsLoaded = () => {
     this.setState ({ bookLoaded: true})
+    setTimeout(this.bookAudio, 13000)
+  }
+
+  bookAudio = () => {
+    this.setState({ bookAudio: false })
   }
 
   render() {
     return (
         <ViroARScene>
+          <ViroSound
+            source={require("../objects/sounds/intro_soundtrack.mp3")}
+            volume={1.0}
+            paused={false}
+          />
           {this.state.takeRose === false ?
             <ViroARCamera>
               <ViroFlexView
@@ -94,13 +105,13 @@ export default class BookScene extends Component {
           </ViroARCamera>
           }
           <ViroSound
-            source={require("../objects/sounds/intro_soundtrack.mp3")}
-            volume={1.0}
-            paused={false}
-          />
-          <ViroSound
             paused={this.state.screamPause}
             source={require("../objects/sounds/scream_one.mp3")}
+            volume={1.0}
+          />
+          <ViroSound
+            paused={this.state.bookAudio}
+            source={require("../objects/sounds/they_never_picked_up_a_book.m4a")}
             volume={1.0}
           />
           <ViroNode
@@ -117,7 +128,7 @@ export default class BookScene extends Component {
                 source={require('../objects/book_obj/objBook.obj')}
                 resources={[require('../objects/book_obj/objBook.mtl')]}
                 placeholderSource={require("../objects/book_obj/libro.jpg")}
-                position={[0, 0, -0.5]}
+                position={[0, 0, -1]}
                 scale={[0.03,0.03,0.03]}
                 dragType="FixedDistance"
                 onDrag={()=>{}}
@@ -127,7 +138,7 @@ export default class BookScene extends Component {
               {this.state.bookLoaded === true ?
                 <ViroText text='Look Behind You'
                   scale={[.2, .2, .2]}
-                  position={[0.02, -0.2, -1]}
+                  position={[0, -0.04, -1.1]}
                   rotation={[10,10,0]}
                   style={styles.textStyle} />
               : null }
