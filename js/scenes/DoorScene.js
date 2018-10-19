@@ -44,6 +44,11 @@ export default class DoorScene extends Component {
   render() {
     return (
       <ViroARScene>
+        <ViroSound
+          source={require("../objects/sounds/has_to_be_a_door.m4a")}
+          volume={1.0}
+          paused={false}
+        />
         {this.props.flower_one === false ?
           <ViroARCamera>
             <ViroFlexView
@@ -92,13 +97,12 @@ export default class DoorScene extends Component {
           </ViroFlexView>
         </ViroARPlane>
       </ViroARScene>
-    )
-  }
-}
+        )
+        }
+        }
 
 ViroAnimations.registerAnimations({
-    animateImage:{properties:{positionX:-3, positionY:-8.5,
-                              opacity: 0},
+    animateImage:{properties:{positionX:-3, positionY:-8.5,opacity: 0},
                   easing:"EaseIn",
                   duration: 3000},
 })

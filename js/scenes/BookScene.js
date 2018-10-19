@@ -35,7 +35,9 @@ export default class BookScene extends Component {
         takeRose: false,
         roseOnChest: false,
         bookLoaded: false,
-        bookAudio: true
+        bookAudio: true,
+        soundtrack: false,
+        renderTheRest: false
       }
   }
 
@@ -85,6 +87,7 @@ export default class BookScene extends Component {
             volume={1.0}
             paused={false}
           />
+
           {this.state.takeRose === false ?
             <ViroARCamera>
               <ViroFlexView
@@ -171,8 +174,8 @@ export default class BookScene extends Component {
 
 ViroMaterials.createMaterials({
   book: {
-     diffuseTexture: require('../objects/book_obj/libro.jpg'),
-     specularTexture: require('../objects/book_obj/libroEspecular.jpg')
+    diffuseTexture: require('../objects/book_obj/libro.jpg'),
+    specularTexture: require('../objects/book_obj/libroEspecular.jpg')
    }
 })
 
