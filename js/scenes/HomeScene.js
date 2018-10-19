@@ -15,7 +15,6 @@ import MainTitle from '../redux/components/MainTitle.js'
 
 export default class HomeScene extends Component {
   render() {
-    console.log('STATE!', this.props)
     return (
       <View style={localStyles.outer} >
         <View style={localStyles.inner} >

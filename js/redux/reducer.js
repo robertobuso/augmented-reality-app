@@ -32,7 +32,6 @@ const reducer = (state = initialState, action) => {
       }
 
       case 'CHOOSE_EXPERIENCE':
-      console.log(action.payload.experience.flower_one)
       return {
         status: action.payload.experience.status,
         start: true,
@@ -44,7 +43,6 @@ const reducer = (state = initialState, action) => {
       }
 
       case 'TAKE_FLOWER':
-      console.log('inside take flower: ', action.payload.flower)
         return {
           ...state,
           [action.payload.flower]: true,
@@ -52,7 +50,6 @@ const reducer = (state = initialState, action) => {
         }
 
         case 'COMPLETE_TASK':
-        console.log('inside complete task: ', action.payload.task)
           return {
             ...state,
             [action.payload.task]: true,

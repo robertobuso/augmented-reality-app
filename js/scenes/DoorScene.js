@@ -28,7 +28,10 @@ export default class DoorScene extends Component {
   constructor() {
     super();
     this.state = {
-        paused: false
+        paused: false,
+        screamPause: true,
+        takeRose: false,
+        roseOnChest: false
       }
   }
 
@@ -39,7 +42,6 @@ export default class DoorScene extends Component {
   }
 
   render() {
-    console.log('second scene props: ', this.props)
     return (
       <ViroARScene>
         {this.props.flower_one === false ?
@@ -61,20 +63,34 @@ export default class DoorScene extends Component {
           </ViroFlexView>
         </ViroARCamera>
         }
-
-        <ViroFlexView
-          style={{flexDirection: 'row', padding: 1}}
-          width={10} height={5}
-          position={[0.1, 0, -10]}
-          rotation={[0, 33, 0]} >
-          <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
-          <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
-          <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
-          <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
-          <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
-        </ViroFlexView>
-
-
+        <ViroARPlane
+          minHeight={0.2}
+          minWidth={0.2}
+          alignment={'Horizontal'}
+          pauseUpdates={this.state.paused}
+          onPlaneSelected={this.planeSelected}>
+          <ViroFlexView
+            style={{flexDirection: 'row', padding: 1}}
+            width={10} height={5}
+            position={[0.1, 0, -10]}
+            rotation={[0, 33, 0]} >
+            <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
+          </ViroFlexView>
+          <ViroFlexView
+            style={{flexDirection: 'row', padding: 1}}
+            width={10} height={5}
+            position={[0.5, 0, -12]}
+            rotation={[0, 33, 0]} >
+            <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
+          </ViroFlexView>
+          <ViroFlexView
+            style={{flexDirection: 'row', padding: 1}}
+            width={10} height={5}
+            position={[0.9, 0, -14]}
+            rotation={[0, 33, 0]} >
+            <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
+          </ViroFlexView>
+        </ViroARPlane>
       </ViroARScene>
     )
   }

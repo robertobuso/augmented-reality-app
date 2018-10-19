@@ -31,7 +31,6 @@ class StartContinueButtons extends Component {
   }
 
   render() {
-    console.log('Props: ', this.props)
     return(
       <View style={localStyles.buttonInner}>
         <View style={localStyles.container}>

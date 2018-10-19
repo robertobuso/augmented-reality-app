@@ -33,7 +33,8 @@ export default class BookScene extends Component {
         paused: false,
         screamPause: true,
         takeRose: false,
-        roseOnChest: false
+        roseOnChest: false,
+        bookLoaded: false
       }
   }
 
@@ -66,8 +67,11 @@ export default class BookScene extends Component {
     this.props.arSceneNavigator.push({scene:DoorScene})
   }
 
+  bookIsLoaded = () => {
+    this.setState ({ bookLoaded: true})
+  }
+
   render() {
-        console.log('first scene props: ', this.props)
     return (
         <ViroARScene>
           {this.state.takeRose === false ?
@@ -102,27 +106,31 @@ export default class BookScene extends Component {
           <ViroNode
             position={[0, 0.3, -.05]}>
             <ViroARPlane
-              minHeight={0.5}
-              minWidth={0.5}
+              minHeight={0.2}
+              minWidth={0.2}
               alignment={'Horizontal'}
               pauseUpdates={this.state.paused}
               onPlaneSelected={this.planeSelected}>
               <ViroAmbientLight color="#ffffff"/>
-              <ViroText text='Look Behind You'
-                scale={[.2, .2, .2]}
-                position={[0, -0.05, 0]}
-                rotation={[10,10,0]}
-                style={styles.textStyle} />
-
-              <Viro3DObject source={require('../objects/book_obj/objBook.obj')}
+              <Viro3DObject
+                onLoadEnd={this.bookIsLoaded}
+                source={require('../objects/book_obj/objBook.obj')}
                 resources={[require('../objects/book_obj/objBook.mtl')]}
                 placeholderSource={require("../objects/book_obj/libro.jpg")}
-                position={[0, 0, 0]}
+                position={[0, 0, -0.5]}
                 scale={[0.03,0.03,0.03]}
                 dragType="FixedDistance"
                 onDrag={()=>{}}
                 materials={["book"]}
               type="OBJ"/>
+              <ViroAmbientLight color="#ffffff"/>
+              {this.state.bookLoaded === true ?
+                <ViroText text='Look Behind You'
+                  scale={[.2, .2, .2]}
+                  position={[0.02, -0.2, -1]}
+                  rotation={[10,10,0]}
+                  style={styles.textStyle} />
+              : null }
             </ViroARPlane>
 
             <ViroAmbientLight color="#fffeff"/>
