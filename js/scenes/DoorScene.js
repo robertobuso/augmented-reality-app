@@ -31,7 +31,8 @@ export default class DoorScene extends Component {
         paused: false,
         screamPause: true,
         takeRose: false,
-        roseOnChest: false
+        roseOnChest: false,
+        opacity: 1
       }
   }
 
@@ -43,8 +44,13 @@ export default class DoorScene extends Component {
   }
 
   takeChurch = () => {
+    if (this.state.opacity === 1) {
       this.setState({
-        takeChurch: true})
+        opacity: 0})
+      } else {
+        this.setState({
+          takeChurch: true})
+      }
   }
 
   render() {
@@ -124,20 +130,18 @@ export default class DoorScene extends Component {
             rotation={[0, -45, 0]} >
             <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
           </ViroFlexView>
-          <ViroAmbientLight color="#fffeff"/>
-          <Viro3DObject source={require('../objects/church/church.obj')}
-            resources={[require('../objects/church/church.mtl'),
-              require('../objects/church/churchbrick.jpg'),
-              require('../objects/church/bricknormalmap.jpg')]}
-            materials={['church']}
-            position={[1, 0.5, -5]}
-            scale={[.02,.02,.02]}
-            onClick={this.takeChurch}
-            dragType="FixedDistance"
-            onDrag={()=>{}}
-            animation={{name:'growAndMinimizeChurch', run:this.state.takeChurch}}
-          type="OBJ"/>
         </ViroARPlane>
+        <ViroAmbientLight color="#fffeff"/>
+        <Viro3DObject source={require('../objects/chapel/chapel_obj.obj')}
+          resources={[require('../objects/chapel/chapel_obj.mtl')]}
+          materials={['church']}
+          position={[1, 0.5, -3]}
+          scale={[.0009,.0009,.000]}
+          onClick={this.takeChurch}
+          dragType="FixedDistance"
+          onDrag={()=>{}}
+          animation={{name:'growAndMinimizeChurch', run:this.state.takeChurch}}
+        type="OBJ"/>
       </ViroARScene>
         )
         }
@@ -164,8 +168,9 @@ ViroMaterials.createMaterials({
 
 ViroMaterials.createMaterials({
   church: {
-     diffuseTexture: require('../objects/church/lightstone.jpg'),
-     specularTexture: require('../objects/church/lightstonenormalmap.jpg')
+     diffuseTexture: require('../objects/chapel/chapel_diffuse.jpg'),
+     specularTexture: require('../objects/chapel/chapel_spec.jpg'),
+       normalTexture: require('../objects/chapel/chapel_normal.jpg')
    }
 })
 
