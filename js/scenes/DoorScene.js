@@ -131,24 +131,31 @@ export default class DoorScene extends Component {
             <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
           </ViroFlexView>
         </ViroARPlane>
-        <ViroAmbientLight color="#fffeff"/>
-        <Viro3DObject source={require('../objects/chapel/chapel_obj.obj')}
-          resources={[require('../objects/chapel/chapel_obj.mtl')]}
-          materials={['church']}
-          position={[1, 0.5, -3]}
-          scale={[.0009,.0009,.000]}
-          onClick={this.takeChurch}
-          dragType="FixedDistance"
-          onDrag={()=>{}}
-          animation={{name:'growAndMinimizeChurch', run:this.state.takeChurch}}
-        type="OBJ"/>
+        <ViroARPlane
+          minHeight={0.2}
+          minWidth={0.2}
+          alignment={'Horizontal'}
+          pauseUpdates={this.state.paused}
+          onPlaneSelected={this.planeSelected}>
+          <ViroAmbientLight color="#ffffff"/>
+          <Viro3DObject source={require('../objects/chapel/chapel_obj.obj')}
+            resources={[require('../objects/chapel/chapel_obj.mtl')]}
+            materials={['church']}
+            position={[1, 0.5, -0.5]}
+            scale={[.001,.001,.001]}
+            // onClick={this.takeChurch}
+            dragType="FixedDistance"
+            onDrag={()=>{}}
+          type="OBJ"/>
+        </ViroARPlane>
       </ViroARScene>
-        )
-        }
-        }
+    )
+  }
+}
 
   ViroAnimations.registerAnimations({
       animateImage:{properties:{positionX:-3, positionY:-8.5,opacity: 0}, easing:"EaseIn", duration: 2000},
+      rotateChurch:{properties: {rotateY:360, rotateZ: 360}, easing:"EaseIn", duration: 3000},
       growChurch: {properties:{scaleX:0.2, scaleY:0.2, scaleZ:0.2, opacity: 1.0}, easing:"Linear", duration: 3000},
       minimizeChurch: {properties:{scaleX:-0.5, scaleY:-0.5, scaleZ:-0.3, opacity: 1.0}, easing:"Linear", duration: 3000},
       growAndMinimizeChurch: [["growChurch", "minimizeChurch"]]
@@ -170,10 +177,9 @@ ViroMaterials.createMaterials({
   church: {
      diffuseTexture: require('../objects/chapel/chapel_diffuse.jpg'),
      specularTexture: require('../objects/chapel/chapel_spec.jpg'),
-       normalTexture: require('../objects/chapel/chapel_normal.jpg')
+     normalTexture: require('../objects/chapel/chapel_normal.jpg')
    }
 })
-
 
 const mapStateToProps = (state) => {
   return state
