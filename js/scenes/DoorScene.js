@@ -37,8 +37,14 @@ export default class DoorScene extends Component {
 
   planeSelected = (anchor) => {
     this.setState({
-      paused: true
+      paused: true,
+      takeChurch: false
     })
+  }
+
+  takeChurch = () => {
+      this.setState({
+        takeChurch: true})
   }
 
   render() {
@@ -95,17 +101,54 @@ export default class DoorScene extends Component {
             rotation={[0, 33, 0]} >
             <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
           </ViroFlexView>
+
+          {/*The ones on the right*/}
+          <ViroFlexView
+            style={{flexDirection: 'row', padding: 1}}
+            width={10} height={5}
+            position={[3, 0, -10]}
+            rotation={[0, -45, 0]} >
+            <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
+          </ViroFlexView>
+          <ViroFlexView
+            style={{flexDirection: 'row', padding: 1}}
+            width={10} height={5}
+            position={[4, 0, -12]}
+            rotation={[0, -45, 0]} >
+            <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
+          </ViroFlexView>
+          <ViroFlexView
+            style={{flexDirection: 'row', padding: 1}}
+            width={10} height={5}
+            position={[5, 0, -14]}
+            rotation={[0, -45, 0]} >
+            <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
+          </ViroFlexView>
+          <ViroAmbientLight color="#fffeff"/>
+          <Viro3DObject source={require('../objects/church/church.obj')}
+            resources={[require('../objects/church/church.mtl'),
+              require('../objects/church/churchbrick.jpg'),
+              require('../objects/church/bricknormalmap.jpg')]}
+            materials={['church']}
+            position={[1, 0.5, -5]}
+            scale={[.02,.02,.02]}
+            onClick={this.takeChurch}
+            dragType="FixedDistance"
+            onDrag={()=>{}}
+            animation={{name:'growAndMinimizeChurch', run:this.state.takeChurch}}
+          type="OBJ"/>
         </ViroARPlane>
       </ViroARScene>
         )
         }
         }
 
-ViroAnimations.registerAnimations({
-    animateImage:{properties:{positionX:-3, positionY:-8.5,opacity: 0},
-                  easing:"EaseIn",
-                  duration: 3000},
-})
+  ViroAnimations.registerAnimations({
+      animateImage:{properties:{positionX:-3, positionY:-8.5,opacity: 0}, easing:"EaseIn", duration: 2000},
+      growChurch: {properties:{scaleX:0.2, scaleY:0.2, scaleZ:0.2, opacity: 1.0}, easing:"Linear", duration: 3000},
+      minimizeChurch: {properties:{scaleX:-0.5, scaleY:-0.5, scaleZ:-0.3, opacity: 1.0}, easing:"Linear", duration: 3000},
+      growAndMinimizeChurch: [["growChurch", "minimizeChurch"]]
+  })
 
 ViroAnimations.registerAnimations({
     fadeIn:{properties:{opacity: 1},
@@ -118,6 +161,14 @@ ViroMaterials.createMaterials({
      diffuseTexture: require('../objects/door/tex.jpg')
    },
 })
+
+ViroMaterials.createMaterials({
+  church: {
+     diffuseTexture: require('../objects/church/lightstone.jpg'),
+     specularTexture: require('../objects/church/lightstonenormalmap.jpg')
+   }
+})
+
 
 const mapStateToProps = (state) => {
   return state

@@ -1,0 +1,134 @@
+# Blender MTL File: 'Parish Church Model+.blend'
+# Material Count: 13
+
+newmtl BladePlasticSmoothShade
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.020315 0.020315 0.020315
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl ChurchBrickFlateShade
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.402309 0.325792 0.213085
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd C:\\Users\\samsung\\Desktop\\Neil\\NEIL'S CREATIONS\\Blender Projects\\NEIL\\JPeg Textures\\Texture Images\\Bricks\\Brick 006Pale.jpg
+map_Disp C:\\Users\\samsung\\Desktop\\Neil\\NEIL'S CREATIONS\\Blender Projects\\NEIL\\JPeg Textures\\Texture Images\\Bricks\\Brick 004PaleBUMP.jpg
+
+newmtl DarkStoneFlatShade
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.064176 0.053301 0.046244
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\samsung\Desktop\Neil\NEIL'S CREATIONS\Blender Projects\NEIL\JPeg Textures\Texture Images\Bricks\Brick 005Pale.jpg
+
+newmtl DarkStoneFlatShade_BrickRedTiled.png
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.064176 0.053301 0.046244
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\samsung\Desktop\Neil\NEIL'S CREATIONS\Blender Projects\ARCHITECTURE\PARISH CHURCH\BeigeRedTiledGrey.jpg
+
+newmtl DarkStoneFlatShade_Brick_006Pale.jpg
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.064176 0.053301 0.046244
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\samsung\Desktop\Neil\NEIL'S CREATIONS\Blender Projects\NEIL\JPeg Textures\Texture Images\Bricks\Brick 006Pale.jpg
+
+newmtl DarkStoneFlatShade_NONE
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.064176 0.053301 0.046244
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl DoorWoodSmoothShade
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.046242 0.046242 0.046242
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl GlassFlatShade
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.683983 0.486692 0.671850
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+
+newmtl LightStoneFlatShade
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.402309 0.325792 0.213085
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd C:\Users\samsung\Desktop\Neil\NEIL'S CREATIONS\Blender Projects\NEIL\JPeg Textures\Texture Images\Bricks\Brick 005Pale.jpg
+map_Disp C:\\Users\\samsung\\Desktop\\Neil\\NEIL'S CREATIONS\\Blender Projects\\NEIL\\JPeg Textures\\Texture Images\\Bricks\\Brick 004PaleBUMP.jpg
+
+newmtl LightStoneFlatShade_NONE
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.402309 0.325792 0.213085
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd C:\\Users\\samsung\\Desktop\\Neil\\NEIL'S CREATIONS\\Blender Projects\\NEIL\\JPeg Textures\\Texture Images\\Bricks\\Brick 006Pale.jpg
+map_Disp C:\\Users\\samsung\\Desktop\\Neil\\NEIL'S CREATIONS\\Blender Projects\\NEIL\\JPeg Textures\\Texture Images\\Bricks\\Brick 004PaleBUMP.jpg
+
+newmtl LightStoneSmoothShade
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.402309 0.325792 0.213085
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd C:\Users\samsung\Desktop\Neil\NEIL'S CREATIONS\Blender Projects\NEIL\JPeg Textures\Texture Images\Bricks\Brick 005Pale.jpg
+map_Disp C:\\Users\\samsung\\Desktop\\Neil\\NEIL'S CREATIONS\\Blender Projects\\NEIL\\JPeg Textures\\Texture Images\\Bricks\\Brick 004PaleBUMP.jpg
+
+newmtl LightStoneSmoothShade_Brick_006Pale.jpg
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.402309 0.325792 0.213085
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd C:\Users\samsung\Desktop\Neil\NEIL'S CREATIONS\Blender Projects\NEIL\JPeg Textures\Texture Images\Bricks\Brick 006Pale.jpg
+map_Disp C:\\Users\\samsung\\Desktop\\Neil\\NEIL'S CREATIONS\\Blender Projects\\NEIL\\JPeg Textures\\Texture Images\\Bricks\\Brick 004PaleBUMP.jpg
+
+newmtl LightStoneSmoothShade_NONE
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.402309 0.325792 0.213085
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd C:\\Users\\samsung\\Desktop\\Neil\\NEIL'S CREATIONS\\Blender Projects\\NEIL\\JPeg Textures\\Texture Images\\Bricks\\Brick 006Pale.jpg
+map_Disp C:\\Users\\samsung\\Desktop\\Neil\\NEIL'S CREATIONS\\Blender Projects\\NEIL\\JPeg Textures\\Texture Images\\Bricks\\Brick 004PaleBUMP.jpg
