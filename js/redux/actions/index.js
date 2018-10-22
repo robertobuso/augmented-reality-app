@@ -17,7 +17,8 @@ export const setUpdatedAudio = (audioSelection) => {
 }
 
 export const loadExperience = () => {
-    return (dispatch) => {fetchExperience()
+    return (dispatch) => {
+      fetchExperience()
     .then(experience => {
       dispatch(setExperience(experience))
     })

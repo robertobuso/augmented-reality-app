@@ -138,37 +138,41 @@ export default class DoorScene extends Component {
             <ViroImage source={require('../objects/paintings/rodon.jpg')} style={{flex: .2}} />
           </ViroFlexView>
         </ViroARPlane>
+
         <ViroARPlaneSelector
           minHeight={0.2}
           minWidth={0.2}
           alignment={'Horizontal'}
           pauseUpdates={this.state.paused}
           onPlaneSelected={this.planeSelected}>
-          <ViroAmbientLight color="#ffffff"/>
-          <Viro3DObject source={require('../objects/chapel/chapel_obj.obj')}
-            resources={[require('../objects/chapel/chapel_obj.mtl')]}
-            materials={['church']}
-            position={[0, 0, -2]}
-            scale={[.0006,.0006,.0006]}
-            animation={{name:'rotateChurch', run:this.props.click_chest}}
-            onClick={this.takeChurch}
-            dragType="FixedDistance"
-            onDrag={()=>{}}
-            opacity={this.state.opacity}
-          type="OBJ"/>
+          <ViroNode>
+            <ViroAmbientLight color="#ffffff"/>
+            <Viro3DObject source={require('../objects/chapel/chapel_obj.obj')}
+              resources={[require('../objects/chapel/chapel_obj.mtl')]}
+              materials={['church']}
+              position={[0, 0, -2]}
+              scale={[.0006,.0006,.0006]}
+              animation={{name:'rotateChurch', run:this.props.click_chest}}
+              onClick={this.takeChurch}
+              dragType="FixedDistance"
+              onDrag={()=>{}}
+              opacity={this.state.opacity}
+            type="OBJ"/>
+            <ViroAmbientLight color="#a88be5" intensity={200}/>
+            <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={()=>{}} >
+              <ViroPortal position={[-2, 1.5, -0.5]} scale={[.2, .2, .2]}
+                opacity={!this.state.opacity}>
+                <Viro3DObject source={require('../objects/portal_archway/portal_archway.vrx')}
+                  resources={[require('../objects/portal_archway/portal_archway_diffuse.png'),
+                    require('../objects/portal_archway/portal_archway_normal.png'),
+                    require('../objects/portal_archway/portal_archway_specular.png')]}
+                type="VRX"/>
+              </ViroPortal>
+              <Viro360Image source={require("../objects/woods.jpg")} />
+            </ViroPortalScene>
+          </ViroNode>
         </ViroARPlaneSelector>
-        <ViroAmbientLight color="#a88be5" intensity={200}/>
-        <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={()=>{}} >
-          <ViroPortal position={[0.5, -0.25, -0.5]} scale={[.1, .1, .1]}
-            opacity={!this.state.opacity}>
-            <Viro3DObject source={require('../objects/portal_archway/portal_archway.vrx')}
-              resources={[require('../objects/portal_archway/portal_archway_diffuse.png'),
-                require('../objects/portal_archway/portal_archway_normal.png'),
-                require('../objects/portal_archway/portal_archway_specular.png')]}
-            type="VRX"/>
-          </ViroPortal>
-          <Viro360Image source={require("../objects/woods.jpg")} />
-        </ViroPortalScene>
+
       </ViroARScene>
     )
   }
