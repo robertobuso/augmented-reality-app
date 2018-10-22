@@ -11,6 +11,7 @@
     "react": "16.3.1",
     "react-dom": "^16.5.2",
     "react-native": "0.55.1",
+    "react-native-fade-in-view": "^1.0.5",
     "react-native-play-sound": "^1.0.24",
     "react-native-sound": "^0.10.9",
     "react-navigation": "^2.18.0",

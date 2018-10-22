@@ -8,6 +8,7 @@ import {
   ViroARScene,
   ViroText,
   ViroARPlane,
+  ViroARPlaneSelector,
   Viro3DObject,
   ViroAmbientLight,
   ViroMaterials,
@@ -16,7 +17,10 @@ import {
   ViroFlexView,
   ViroImage,
   ViroARCamera,
-  ViroAnimations
+  ViroAnimations,
+  ViroPortal,
+  ViroPortalScene,
+  Viro360Image
 } from 'react-viro';
 
 import { connect } from 'react-redux'
@@ -29,9 +33,6 @@ export default class DoorScene extends Component {
     super();
     this.state = {
         paused: false,
-        screamPause: true,
-        takeRose: false,
-        roseOnChest: false,
         opacity: 1
       }
   }
@@ -53,7 +54,12 @@ export default class DoorScene extends Component {
       }
   }
 
+  clickChest = () => {
+    this.props.completeTask('click_chest')
+  }
+
   render() {
+    console.log(this.props.click_chest)
     return (
       <ViroARScene>
         <ViroSound
@@ -61,25 +67,16 @@ export default class DoorScene extends Component {
           volume={1.0}
           paused={false}
         />
-        {this.props.flower_one === false ?
-          <ViroARCamera>
-            <ViroFlexView
-              position={[1, -1.4, -5]}
-              height={0.5}
-              width={0.5}>
-              <ViroImage source={require('../objects/chest.png')} />
-            </ViroFlexView>
-          </ViroARCamera>
-        :
         <ViroARCamera>
           <ViroFlexView
             position={[1, -1.4, -5]}
             height={0.5}
             width={0.5}>
-            <ViroImage source={require('../objects/rose_in_chest.png')} />
+            <ViroImage source={require('../objects/rose_in_chest.png')}
+              onClick={this.clickChest}/>
           </ViroFlexView>
         </ViroARCamera>
-        }
+
         <ViroARPlane
           minHeight={0.2}
           minWidth={0.2}
@@ -91,21 +88,21 @@ export default class DoorScene extends Component {
             width={10} height={5}
             position={[0.1, 0, -10]}
             rotation={[0, 33, 0]} >
-            <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
+            <ViroImage source={require('../objects/paintings/remedios.png')} style={{flex: .2}} />
           </ViroFlexView>
           <ViroFlexView
             style={{flexDirection: 'row', padding: 1}}
             width={10} height={5}
-            position={[0.5, 0, -12]}
+            position={[0.8, 0, -12]}
             rotation={[0, 33, 0]} >
-            <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
+            <ViroImage source={require('../objects/paintings/baez.jpg')} style={{flex: .2}} />
           </ViroFlexView>
           <ViroFlexView
             style={{flexDirection: 'row', padding: 1}}
             width={10} height={5}
-            position={[0.9, 0, -14]}
+            position={[1.5, 0, -14]}
             rotation={[0, 33, 0]} >
-            <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
+            <ViroImage source={require('../objects/paintings/orozco.jpg')} style={{flex: .2}} />
           </ViroFlexView>
 
           {/*The ones on the right*/}
@@ -114,24 +111,24 @@ export default class DoorScene extends Component {
             width={10} height={5}
             position={[3, 0, -10]}
             rotation={[0, -45, 0]} >
-            <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
+            <ViroImage source={require('../objects/paintings/roche.jpg')} style={{flex: .2}} />
           </ViroFlexView>
           <ViroFlexView
             style={{flexDirection: 'row', padding: 1}}
             width={10} height={5}
             position={[4, 0, -12]}
             rotation={[0, -45, 0]} >
-            <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
+            <ViroImage source={require('../objects/paintings/oller.jpg')} style={{flex: .2}} />
           </ViroFlexView>
           <ViroFlexView
             style={{flexDirection: 'row', padding: 1}}
             width={10} height={5}
             position={[5, 0, -14]}
             rotation={[0, -45, 0]} >
-            <ViroImage source={require('../objects/eyes.jpg')} style={{flex: .2}} />
+            <ViroImage source={require('../objects/paintings/rodon.jpg')} style={{flex: .2}} />
           </ViroFlexView>
         </ViroARPlane>
-        <ViroARPlane
+        <ViroARPlaneSelector
           minHeight={0.2}
           minWidth={0.2}
           alignment={'Horizontal'}
@@ -141,13 +138,25 @@ export default class DoorScene extends Component {
           <Viro3DObject source={require('../objects/chapel/chapel_obj.obj')}
             resources={[require('../objects/chapel/chapel_obj.mtl')]}
             materials={['church']}
-            position={[1, 0.5, -0.5]}
-            scale={[.001,.001,.001]}
+            position={[0, 0, -2]}
+            scale={[.0006,.0006,.0006]}
+            animation={{name:'rotateChurch', run:this.props.click_chest}}
             // onClick={this.takeChurch}
             dragType="FixedDistance"
             onDrag={()=>{}}
           type="OBJ"/>
-        </ViroARPlane>
+        </ViroARPlaneSelector>
+        <ViroAmbientLight color="#a88be5" intensity={200}/>
+        <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={()=>{}} >
+          <ViroPortal position={[0.5, -0.25, -0.5]} scale={[.1, .1, .1]}>
+            <Viro3DObject source={require('../objects/portal_archway/portal_archway.vrx')}
+              resources={[require('../objects/portal_archway/portal_archway_diffuse.png'),
+                require('../objects/portal_archway/portal_archway_normal.png'),
+                require('../objects/portal_archway/portal_archway_specular.png')]}
+            type="VRX"/>
+          </ViroPortal>
+          <Viro360Image source={require("../objects/woods.jpg")} />
+        </ViroPortalScene>
       </ViroARScene>
     )
   }
@@ -155,7 +164,7 @@ export default class DoorScene extends Component {
 
   ViroAnimations.registerAnimations({
       animateImage:{properties:{positionX:-3, positionY:-8.5,opacity: 0}, easing:"EaseIn", duration: 2000},
-      rotateChurch:{properties: {rotateY:360, rotateZ: 360}, easing:"EaseIn", duration: 3000},
+      rotateChurch:{properties: {rotateY:360}, easing:"Linear", duration: 10000},
       growChurch: {properties:{scaleX:0.2, scaleY:0.2, scaleZ:0.2, opacity: 1.0}, easing:"Linear", duration: 3000},
       minimizeChurch: {properties:{scaleX:-0.5, scaleY:-0.5, scaleZ:-0.3, opacity: 1.0}, easing:"Linear", duration: 3000},
       growAndMinimizeChurch: [["growChurch", "minimizeChurch"]]

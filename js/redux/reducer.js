@@ -6,7 +6,9 @@ const initialState = {
         flower_two: false,
         flower_three: false,
         drag_book: false,
-        take_flower_one: false
+        take_flower_one: false,
+        click_chest: false,
+        click_church: false
        }
 
 const reducer = (state = initialState, action) => {

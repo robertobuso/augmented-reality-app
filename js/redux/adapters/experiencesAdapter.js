@@ -12,6 +12,8 @@ export const fetchNewExperience = () => {
     flower_three: false,
     drag_book: false,
     take_flower_one: false,
+    click_chest: false,
+    click_church: false,
     status: 'new'
   }
 
