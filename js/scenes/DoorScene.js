@@ -59,7 +59,7 @@ export default class DoorScene extends Component {
   }
 
   render() {
-    console.log(this.props.click_chest)
+    console.log('Props at Render: ', this.props)
     return (
       <ViroARScene>
         <ViroSound

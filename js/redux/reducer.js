@@ -41,7 +41,9 @@ const reducer = (state = initialState, action) => {
         flower_two: action.payload.experience.flower_two,
         flower_three: action.payload.experience.flower_three,
         drag_book: action.payload.experience.drag_book,
-        take_flower_one: action.payload.experience.take_flower_one
+        take_flower_one: action.payload.experience.take_flower_one,
+        click_chest: action.payload.experience.click_chest,
+        click_church: action.payload.experience.click_church
       }
 
       case 'TAKE_FLOWER':
