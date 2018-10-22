@@ -50,7 +50,7 @@ export default class DoorScene extends Component {
     if (this.props.click_chest != true) {
       this.setState( {playWarning: false} )
     } else {
-      this.props.completeTask('click_church')
+      this.setState( {opacity: 0}, () => this.props.completeTask('click_church'))
     }
   }
 
@@ -60,7 +60,6 @@ export default class DoorScene extends Component {
   }
 
   render() {
-    console.log('Props at Render: ', this.props)
     return (
       <ViroARScene>
         <ViroSound
@@ -155,11 +154,13 @@ export default class DoorScene extends Component {
             onClick={this.takeChurch}
             dragType="FixedDistance"
             onDrag={()=>{}}
+            opacity={this.state.opacity}
           type="OBJ"/>
         </ViroARPlaneSelector>
         <ViroAmbientLight color="#a88be5" intensity={200}/>
         <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={()=>{}} >
-          <ViroPortal position={[0.5, -0.25, -0.5]} scale={[.1, .1, .1]}>
+          <ViroPortal position={[0.5, -0.25, -0.5]} scale={[.1, .1, .1]}
+            opacity={!this.state.opacity}>
             <Viro3DObject source={require('../objects/portal_archway/portal_archway.vrx')}
               resources={[require('../objects/portal_archway/portal_archway_diffuse.png'),
                 require('../objects/portal_archway/portal_archway_normal.png'),
@@ -174,7 +175,6 @@ export default class DoorScene extends Component {
 }
 
   ViroAnimations.registerAnimations({
-      animateImage:{properties:{positionX:-3, positionY:-8.5,opacity: 0}, easing:"EaseIn", duration: 2000},
       rotateChurch:{properties: {rotateY:360}, easing:"Linear", duration: 10000},
       growChurch: {properties:{scaleX:0.2, scaleY:0.2, scaleZ:0.2, opacity: 1.0}, easing:"Linear", duration: 3000},
       minimizeChurch: {properties:{scaleX:-0.5, scaleY:-0.5, scaleZ:-0.3, opacity: 1.0}, easing:"Linear", duration: 3000},
@@ -182,7 +182,7 @@ export default class DoorScene extends Component {
   })
 
 ViroAnimations.registerAnimations({
-    fadeIn:{properties:{opacity: 1},
+    fadeOut:{properties:{opacity: 0},
                   easing:"Linear",
                   duration: 6000},
 })
