@@ -198,12 +198,6 @@ ViroAnimations.registerAnimations({
     growAndAnimateFlower: [["growFlower", "minimizeFlower", "animateImage"]]
 })
 
-ViroAnimations.registerAnimations({
-    fadeIn:{properties:{opacity: 1},
-                  easing:"Linear",
-                  duration: 6000},
-})
-
 const styles = StyleSheet.create({
   textStyle: {
     fontFamily: 'Arial',

@@ -25,7 +25,7 @@ import {
 
 import { connect } from 'react-redux'
 
-import { takeFlower, completeTask, loadExperience } from '../redux/actions'
+import { completeTask } from '../redux/actions'
 
 export default class DoorScene extends Component {
 
@@ -33,28 +33,29 @@ export default class DoorScene extends Component {
     super();
     this.state = {
         paused: false,
-        opacity: 1
+        opacity: 1,
+        wellDone: true
       }
   }
 
   planeSelected = (anchor) => {
     this.setState({
       paused: true,
-      takeChurch: false
+      takeChurch: false,
+      playWarning: true
     })
   }
 
   takeChurch = () => {
-    if (this.state.opacity === 1) {
-      this.setState({
-        opacity: 0})
-      } else {
-        this.setState({
-          takeChurch: true})
-      }
+    if (this.props.click_chest != true) {
+      this.setState( {playWarning: false} )
+    } else {
+      this.props.completeTask('click_church')
+    }
   }
 
   clickChest = () => {
+    this.setState({wellDone: false})
     this.props.completeTask('click_chest')
   }
 
@@ -66,6 +67,16 @@ export default class DoorScene extends Component {
           source={require("../objects/sounds/has_to_be_a_door.m4a")}
           volume={1.0}
           paused={false}
+        />
+        <ViroSound
+          source={require("../objects/sounds/where_is_flower.m4a")}
+          volume={1.0}
+          paused={this.state.playWarning}
+        />
+        <ViroSound
+          source={require("../objects/sounds/well_done.m4a")}
+          volume={1.0}
+          paused={this.state.wellDone}
         />
         <ViroARCamera>
           <ViroFlexView
@@ -141,7 +152,7 @@ export default class DoorScene extends Component {
             position={[0, 0, -2]}
             scale={[.0006,.0006,.0006]}
             animation={{name:'rotateChurch', run:this.props.click_chest}}
-            // onClick={this.takeChurch}
+            onClick={this.takeChurch}
             dragType="FixedDistance"
             onDrag={()=>{}}
           type="OBJ"/>
@@ -194,4 +205,4 @@ const mapStateToProps = (state) => {
   return state
 }
 
-module.exports =  connect(mapStateToProps, { takeFlower, completeTask, loadExperience } )(DoorScene)
+module.exports =  connect(mapStateToProps, { completeTask } )(DoorScene)
