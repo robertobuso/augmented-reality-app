@@ -116,11 +116,6 @@ export default class BookScene extends Component {
               volume={1.0}
             />
             
-            <ViroSound
-              paused={this.state.bookAudio}
-              source={require("../objects/sounds/they_never_picked_up_a_book.m4a")}
-              volume={1.0}
-            />
             <ViroNode
               position={[0, 0.3, -.05]}>
               <ViroARPlane

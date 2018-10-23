@@ -108,6 +108,7 @@ export default class DoorScene extends Component {
             <Viro360Image source={require("../objects/woods.jpg")} />
           </ViroPortalScene>
 
+          {/*Paintings on the left.*/}
           <ViroFlexView
             style={{flexDirection: 'row', padding: 1}}
             width={10} height={5}
@@ -172,6 +173,7 @@ export default class DoorScene extends Component {
             dragType="FixedToWorld"
             onDrag={()=>{}}
           type="OBJ"/>
+
           <Viro3DObject source={require('../objects/rose_obj/PrimroseP.obj')}
             resources={[
               require('../objects/rose_obj/PrimroseP.mtl'),
@@ -185,6 +187,7 @@ export default class DoorScene extends Component {
             scale={[0.5,0.5,0.5]}
             onClick={this.clickChest}
           type="OBJ"/>
+
         </ViroARPlaneSelector>
       </ViroARScene>
     )
@@ -192,11 +195,11 @@ export default class DoorScene extends Component {
 }
 
   ViroAnimations.registerAnimations({
-      rotateChurch:{properties: {rotateY:360}, easing:"Linear", duration: 15000},
+      rotateChurch: {properties: {rotateY:360}, easing:"Linear", duration: 15000},
       growChurch: {properties:{scaleX:-0.2, scaleY:-0.2, scaleZ:-0.2}, easing:"Linear", duration: 3000},
-      fadeOut:{properties:{opacity: 0, scaleX:-0.5, scaleY:-0.5, scaleZ:-0.5}, easing:"Linear", duration: 2000},
-      fadeIn:{properties:{opacity: 1}, duration: 5000},
-      floatUp:{properties:{positionY:10}, easing:"Bounce", duration: 10000}
+      fadeOut: {properties:{opacity: 0, scaleX:-0.5, scaleY:-0.5, scaleZ:-0.5}, easing:"Linear", duration: 2000},
+      fadeIn: {properties:{opacity: 1}, duration: 5000},
+      floatUp: {properties:{positionY:10}, easing:"Bounce", duration: 10000}
   })
 
 ViroMaterials.createMaterials({
