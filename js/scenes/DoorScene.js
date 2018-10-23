@@ -34,7 +34,8 @@ export default class DoorScene extends Component {
     this.state = {
         paused: false,
         opacity: 1,
-        wellDone: true
+        wellDone: true,
+        churchAnimation: 'rotateChurch'
       }
   }
 
@@ -50,7 +51,10 @@ export default class DoorScene extends Component {
     if (this.props.click_chest != true) {
       this.setState( {playWarning: false} )
     } else {
-      this.setState( {opacity: 0}, () => this.props.completeTask('click_church'))
+      this.setState({
+          opacity: 0,
+          churchAnimation: 'fadeOut'
+      }, () => this.props.completeTask('click_church'))
     }
   }
 
@@ -60,6 +64,7 @@ export default class DoorScene extends Component {
   }
 
   render() {
+    console.log("local state: ", this.state)
     return (
       <ViroARScene>
         <ViroSound
@@ -152,57 +157,51 @@ export default class DoorScene extends Component {
               materials={['church']}
               position={[0, 0, -2]}
               scale={[.0006,.0006,.0006]}
-              animation={{name:'rotateChurch', run:this.props.click_chest}}
+              animation={{name:this.state.churchAnimation, run:this.props.click_chest, interruptible:true}}
               onClick={this.takeChurch}
               dragType="FixedDistance"
               onDrag={()=>{}}
-              opacity={this.state.opacity}
+              // opacity={this.state.opacity}
             type="OBJ"/>
             <ViroAmbientLight color="#a88be5" intensity={200}/>
             <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={()=>{}} >
-              <ViroPortal position={[-2, 1.5, -0.5]} scale={[.2, .2, .2]}
-                opacity={!this.state.opacity}>
+              <ViroPortal
+                position={[0, 0.3, -1]}
+                scale={[.6, .6, .6]}
+                opacity={!this.state.opacity}
+              >
                 <Viro3DObject source={require('../objects/portal_archway/portal_archway.vrx')}
                   resources={[require('../objects/portal_archway/portal_archway_diffuse.png'),
                     require('../objects/portal_archway/portal_archway_normal.png'),
                     require('../objects/portal_archway/portal_archway_specular.png')]}
-                type="VRX"/>
+                  type="VRX"
+                  animation={}/>
               </ViroPortal>
               <Viro360Image source={require("../objects/woods.jpg")} />
             </ViroPortalScene>
           </ViroNode>
         </ViroARPlaneSelector>
-
       </ViroARScene>
     )
   }
 }
 
   ViroAnimations.registerAnimations({
-      rotateChurch:{properties: {rotateY:360}, easing:"Linear", duration: 10000},
-      growChurch: {properties:{scaleX:0.2, scaleY:0.2, scaleZ:0.2, opacity: 1.0}, easing:"Linear", duration: 3000},
-      minimizeChurch: {properties:{scaleX:-0.5, scaleY:-0.5, scaleZ:-0.3, opacity: 1.0}, easing:"Linear", duration: 3000},
-      growAndMinimizeChurch: [["growChurch", "minimizeChurch"]]
+      rotateChurch:{properties: {rotateY:360}, easing:"Linear", duration: 15000},
+      growChurch: {properties:{scaleX:-0.2, scaleY:-0.2, scaleZ:-0.2}, easing:"Linear", duration: 3000},
+      fadeOut:{properties:{opacity: 0, scaleX:-0.5, scaleY:-0.5, scaleZ:-0.3}, easing:"Linear", duration: 2000},
+      fadeIn:{properties: {opacity: 1, duration: 2000}}
   })
-
-ViroAnimations.registerAnimations({
-    fadeOut:{properties:{opacity: 0},
-                  easing:"Linear",
-                  duration: 6000},
-})
 
 ViroMaterials.createMaterials({
   door: {
      diffuseTexture: require('../objects/door/tex.jpg')
    },
-})
-
-ViroMaterials.createMaterials({
-  church: {
-     diffuseTexture: require('../objects/chapel/chapel_diffuse.jpg'),
-     specularTexture: require('../objects/chapel/chapel_spec.jpg'),
-     normalTexture: require('../objects/chapel/chapel_normal.jpg')
-   }
+   church: {
+      diffuseTexture: require('../objects/chapel/chapel_diffuse.jpg'),
+      specularTexture: require('../objects/chapel/chapel_spec.jpg'),
+      normalTexture: require('../objects/chapel/chapel_normal.jpg')
+    }
 })
 
 const mapStateToProps = (state) => {
