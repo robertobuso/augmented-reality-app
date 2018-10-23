@@ -85,22 +85,12 @@ export default class DoorScene extends Component {
           paused={this.state.wellDone}
         />
 
-        <ViroARCamera>
-          <ViroFlexView
-            position={[1, -1.4, -5]}
-            height={0.5}
-            width={0.5}>
-            <ViroImage source={require('../objects/rose_in_chest.png')}
-              onClick={this.clickChest}/>
-          </ViroFlexView>
-        </ViroARCamera>
-
         <ViroAmbientLight color="#a88be5" intensity={200}/>
 
         <ViroARPlaneSelector
           minHeight={.2} minWidth={.2} pauseUpdates={this.state.pauseUpdates} onPlaneSelected={this.planeSelected}>
 
-          <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={()=>{}} >
+          <ViroPortalScene passable={true}  >
             <ViroPortal
               position={[-0.2, 0.5, -0.5]}
               scale={[.25, .25, .25]}
@@ -112,6 +102,8 @@ export default class DoorScene extends Component {
                   require('../objects/portal_archway/portal_archway_specular.png')]}
                 type="VRX"
                 animation={{name:'fadeIn', run:this.props.click_church}}
+                dragType="FixedToWorld"
+                onDrag={()=>{}}
               />
             </ViroPortal>
             <Viro360Image source={require("../objects/woods.jpg")} />
@@ -176,10 +168,24 @@ export default class DoorScene extends Component {
             scale={[.0006,.0006,.0006]}
             animation={{name:this.state.churchAnimation, run:this.props.click_chest, interruptible:true}}
             onClick={this.takeChurch}
-            dragType="FixedDistance"
+            dragType="FixedToWorld"
             onDrag={()=>{}}
           type="OBJ"/>
+          <Viro3DObject source={require('../objects/rose_obj/PrimroseP.obj')}
+            resources={[require('../objects/rose_obj/PrimroseP.mtl'),
+              require('../objects/rose_obj/PRIM1ST.png'),
+              require('../objects/rose_obj/PRIM1P.png'),
+              require('../objects/rose_obj/PRIM1L2.png'),
+              require('../objects/rose_obj/PRIM1L3.png'),
+              require('../objects/rose_obj/PRIMsoil.png'),
+              require('../objects/rose_obj/vase.png')]}
+            position={[0, -1, -0.05]}
+            scale={[0.5,0.5,0.5]}
+            onClick={this.clickChest}
+          type="OBJ"/> 
         </ViroARPlaneSelector>
+
+
       </ViroARScene>
     )
   }
