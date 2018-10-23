@@ -82,6 +82,25 @@ export default class DoorScene extends Component {
           volume={1.0}
           paused={this.state.wellDone}
         />
+        <ViroAmbientLight color="#a88be5" intensity={200}/>
+        <ViroARPlaneSelector minHeight={.5} minWidth={.5} pauseUpdates={this.state.paused} onPlaneSelected={this.planeSelected}>
+          <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={()=>{}} >
+            <ViroPortal
+              position={[0, 0.3, -1]}
+              scale={[.2, .2, .2]}
+              opacity={!this.state.opacity}
+            >
+              <Viro3DObject source={require('../objects/portal_archway/portal_archway.vrx')}
+                resources={[require('../objects/portal_archway/portal_archway_diffuse.png'),
+                  require('../objects/portal_archway/portal_archway_normal.png'),
+                  require('../objects/portal_archway/portal_archway_specular.png')]}
+                type="VRX"
+                animation={{name:'fadeIn', run:this.props.click_church}}/>
+            </ViroPortal>
+            <Viro360Image source={require("../objects/woods.jpg")} />
+          </ViroPortalScene>
+        </ViroARPlaneSelector>
+
         <ViroARCamera>
           <ViroFlexView
             position={[1, -1.4, -5]}
@@ -92,31 +111,30 @@ export default class DoorScene extends Component {
           </ViroFlexView>
         </ViroARCamera>
 
-        <ViroARPlane
-          minHeight={0.2}
-          minWidth={0.2}
-          alignment={'Horizontal'}
-          pauseUpdates={this.state.paused}
-          onPlaneSelected={this.planeSelected}>
+        <ViroNode
+          position={[0,0,-3]}>
           <ViroFlexView
             style={{flexDirection: 'row', padding: 1}}
             width={10} height={5}
             position={[0.1, 0, -10]}
-            rotation={[0, 33, 0]} >
+            rotation={[0, 33, 0]}
+            animation={{name:'floatUp', run:true}}>
             <ViroImage source={require('../objects/paintings/remedios.png')} style={{flex: .2}} />
           </ViroFlexView>
           <ViroFlexView
             style={{flexDirection: 'row', padding: 1}}
             width={10} height={5}
             position={[0.8, 0, -12]}
-            rotation={[0, 33, 0]} >
+            rotation={[0, 33, 0]}
+            animation={{name:'floatUp', run:true}}>
             <ViroImage source={require('../objects/paintings/baez.jpg')} style={{flex: .2}} />
           </ViroFlexView>
           <ViroFlexView
             style={{flexDirection: 'row', padding: 1}}
             width={10} height={5}
             position={[1.5, 0, -14]}
-            rotation={[0, 33, 0]} >
+            rotation={[0, 33, 0]}
+            animation={{name:'floatUp', run:true}}>
             <ViroImage source={require('../objects/paintings/orozco.jpg')} style={{flex: .2}} />
           </ViroFlexView>
 
@@ -125,24 +143,27 @@ export default class DoorScene extends Component {
             style={{flexDirection: 'row', padding: 1}}
             width={10} height={5}
             position={[3, 0, -10]}
-            rotation={[0, -45, 0]} >
+            rotation={[0, -45, 0]}
+            animation={{name:'floatUp', run:true}}>
             <ViroImage source={require('../objects/paintings/roche.jpg')} style={{flex: .2}} />
           </ViroFlexView>
           <ViroFlexView
             style={{flexDirection: 'row', padding: 1}}
             width={10} height={5}
             position={[4, 0, -12]}
-            rotation={[0, -45, 0]} >
+            rotation={[0, -45, 0]}
+            animation={{name:'floatUp', run:true}}>
             <ViroImage source={require('../objects/paintings/oller.jpg')} style={{flex: .2}} />
           </ViroFlexView>
           <ViroFlexView
             style={{flexDirection: 'row', padding: 1}}
             width={10} height={5}
             position={[5, 0, -14]}
-            rotation={[0, -45, 0]} >
+            rotation={[0, -45, 0]}
+            animation={{name:'floatUp', run:true}}>
             <ViroImage source={require('../objects/paintings/rodon.jpg')} style={{flex: .2}} />
           </ViroFlexView>
-        </ViroARPlane>
+        </ViroNode>
 
         <ViroARPlaneSelector
           minHeight={0.2}
@@ -161,24 +182,7 @@ export default class DoorScene extends Component {
               onClick={this.takeChurch}
               dragType="FixedDistance"
               onDrag={()=>{}}
-              // opacity={this.state.opacity}
             type="OBJ"/>
-            <ViroAmbientLight color="#a88be5" intensity={200}/>
-            <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={()=>{}} >
-              <ViroPortal
-                position={[0, 0.3, -1]}
-                scale={[.6, .6, .6]}
-                opacity={!this.state.opacity}
-              >
-                <Viro3DObject source={require('../objects/portal_archway/portal_archway.vrx')}
-                  resources={[require('../objects/portal_archway/portal_archway_diffuse.png'),
-                    require('../objects/portal_archway/portal_archway_normal.png'),
-                    require('../objects/portal_archway/portal_archway_specular.png')]}
-                  type="VRX"
-                  animation={}/>
-              </ViroPortal>
-              <Viro360Image source={require("../objects/woods.jpg")} />
-            </ViroPortalScene>
           </ViroNode>
         </ViroARPlaneSelector>
       </ViroARScene>
@@ -189,8 +193,9 @@ export default class DoorScene extends Component {
   ViroAnimations.registerAnimations({
       rotateChurch:{properties: {rotateY:360}, easing:"Linear", duration: 15000},
       growChurch: {properties:{scaleX:-0.2, scaleY:-0.2, scaleZ:-0.2}, easing:"Linear", duration: 3000},
-      fadeOut:{properties:{opacity: 0, scaleX:-0.5, scaleY:-0.5, scaleZ:-0.3}, easing:"Linear", duration: 2000},
-      fadeIn:{properties: {opacity: 1, duration: 2000}}
+      fadeOut:{properties:{opacity: 0, scaleX:-0.5, scaleY:-0.5, scaleZ:-0.5}, easing:"Linear", duration: 2000},
+      fadeIn:{properties:{opacity: 1}, duration: 5000},
+      floatUp:{properties:{positionY:50}, easing:"Linear", duration: 10000}
   })
 
 ViroMaterials.createMaterials({
