@@ -35,15 +35,17 @@ export default class DoorScene extends Component {
         paused: false,
         opacity: 1,
         wellDone: true,
-        churchAnimation: 'rotateChurch'
+        churchAnimation: 'rotateChurch',
+        pauseUpdates: false
       }
   }
 
-  planeSelected = (anchor) => {
+  planeSelected = () => {
     this.setState({
       paused: true,
       takeChurch: false,
-      playWarning: true
+      playWarning: true,
+      pauseUpdates: true
     })
   }
 
@@ -82,24 +84,6 @@ export default class DoorScene extends Component {
           volume={1.0}
           paused={this.state.wellDone}
         />
-        <ViroAmbientLight color="#a88be5" intensity={200}/>
-        <ViroARPlaneSelector minHeight={.5} minWidth={.5} pauseUpdates={this.state.paused} onPlaneSelected={this.planeSelected}>
-          <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={()=>{}} >
-            <ViroPortal
-              position={[0, 0.3, -1]}
-              scale={[.2, .2, .2]}
-              opacity={!this.state.opacity}
-            >
-              <Viro3DObject source={require('../objects/portal_archway/portal_archway.vrx')}
-                resources={[require('../objects/portal_archway/portal_archway_diffuse.png'),
-                  require('../objects/portal_archway/portal_archway_normal.png'),
-                  require('../objects/portal_archway/portal_archway_specular.png')]}
-                type="VRX"
-                animation={{name:'fadeIn', run:this.props.click_church}}/>
-            </ViroPortal>
-            <Viro360Image source={require("../objects/woods.jpg")} />
-          </ViroPortalScene>
-        </ViroARPlaneSelector>
 
         <ViroARCamera>
           <ViroFlexView
@@ -111,8 +95,28 @@ export default class DoorScene extends Component {
           </ViroFlexView>
         </ViroARCamera>
 
-        <ViroNode
-          position={[0,0,-3]}>
+        <ViroAmbientLight color="#a88be5" intensity={200}/>
+
+        <ViroARPlaneSelector
+          minHeight={.2} minWidth={.2} pauseUpdates={this.state.pauseUpdates} onPlaneSelected={this.planeSelected}>
+
+          <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={()=>{}} >
+            <ViroPortal
+              position={[-0.2, 0.5, -0.5]}
+              scale={[.25, .25, .25]}
+              opacity={!this.state.opacity}
+            >
+              <Viro3DObject source={require('../objects/portal_archway/portal_archway.vrx')}
+                resources={[require('../objects/portal_archway/portal_archway_diffuse.png'),
+                  require('../objects/portal_archway/portal_archway_normal.png'),
+                  require('../objects/portal_archway/portal_archway_specular.png')]}
+                type="VRX"
+                animation={{name:'fadeIn', run:this.props.click_church}}
+              />
+            </ViroPortal>
+            <Viro360Image source={require("../objects/woods.jpg")} />
+          </ViroPortalScene>
+
           <ViroFlexView
             style={{flexDirection: 'row', padding: 1}}
             width={10} height={5}
@@ -163,27 +167,18 @@ export default class DoorScene extends Component {
             animation={{name:'floatUp', run:true}}>
             <ViroImage source={require('../objects/paintings/rodon.jpg')} style={{flex: .2}} />
           </ViroFlexView>
-        </ViroNode>
 
-        <ViroARPlaneSelector
-          minHeight={0.2}
-          minWidth={0.2}
-          alignment={'Horizontal'}
-          pauseUpdates={this.state.paused}
-          onPlaneSelected={this.planeSelected}>
-          <ViroNode>
-            <ViroAmbientLight color="#ffffff"/>
-            <Viro3DObject source={require('../objects/chapel/chapel_obj.obj')}
-              resources={[require('../objects/chapel/chapel_obj.mtl')]}
-              materials={['church']}
-              position={[0, 0, -2]}
-              scale={[.0006,.0006,.0006]}
-              animation={{name:this.state.churchAnimation, run:this.props.click_chest, interruptible:true}}
-              onClick={this.takeChurch}
-              dragType="FixedDistance"
-              onDrag={()=>{}}
-            type="OBJ"/>
-          </ViroNode>
+          <ViroAmbientLight color="#ffffff"/>
+          <Viro3DObject source={require('../objects/chapel/chapel_obj.obj')}
+            resources={[require('../objects/chapel/chapel_obj.mtl')]}
+            materials={['church']}
+            position={[0, 0, -2]}
+            scale={[.0006,.0006,.0006]}
+            animation={{name:this.state.churchAnimation, run:this.props.click_chest, interruptible:true}}
+            onClick={this.takeChurch}
+            dragType="FixedDistance"
+            onDrag={()=>{}}
+          type="OBJ"/>
         </ViroARPlaneSelector>
       </ViroARScene>
     )
