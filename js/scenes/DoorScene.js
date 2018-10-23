@@ -16,7 +16,6 @@ import {
   ViroNode,
   ViroFlexView,
   ViroImage,
-  ViroARCamera,
   ViroAnimations,
   ViroPortal,
   ViroPortalScene,
@@ -32,17 +31,15 @@ export default class DoorScene extends Component {
   constructor() {
     super();
     this.state = {
-        paused: false,
         opacity: 1,
         wellDone: true,
         churchAnimation: 'rotateChurch',
         pauseUpdates: false
-      }
+    }
   }
 
   planeSelected = () => {
     this.setState({
-      paused: true,
       takeChurch: false,
       playWarning: true,
       pauseUpdates: true
@@ -66,16 +63,15 @@ export default class DoorScene extends Component {
   }
 
   render() {
-    console.log("local state: ", this.state)
     return (
       <ViroARScene>
         <ViroSound
-          source={require("../objects/sounds/has_to_be_a_door.m4a")}
+          source={require("../objects/sounds/final_scene_soundtrack.mp3")}
           volume={1.0}
           paused={false}
         />
         <ViroSound
-          source={require("../objects/sounds/where_is_flower.m4a")}
+          source={require("../objects/sounds/click_chest_wrong.m4a")}
           volume={1.0}
           paused={this.state.playWarning}
         />
@@ -84,9 +80,13 @@ export default class DoorScene extends Component {
           volume={1.0}
           paused={this.state.wellDone}
         />
+        <ViroSound
+          paused={!this.props.click_chest}
+          source={require("../objects/sounds/tada.mp3")}
+          volume={1.0}
+        />
 
         <ViroAmbientLight color="#a88be5" intensity={200}/>
-
         <ViroARPlaneSelector
           minHeight={.2} minWidth={.2} pauseUpdates={this.state.pauseUpdates} onPlaneSelected={this.planeSelected}>
 
@@ -94,8 +94,7 @@ export default class DoorScene extends Component {
             <ViroPortal
               position={[-0.2, 0.5, -0.5]}
               scale={[.25, .25, .25]}
-              opacity={!this.state.opacity}
-            >
+              opacity={!this.state.opacity}>
               <Viro3DObject source={require('../objects/portal_archway/portal_archway.vrx')}
                 resources={[require('../objects/portal_archway/portal_archway_diffuse.png'),
                   require('../objects/portal_archway/portal_archway_normal.png'),
@@ -114,7 +113,8 @@ export default class DoorScene extends Component {
             width={10} height={5}
             position={[0.1, 0, -10]}
             rotation={[0, 33, 0]}
-            animation={{name:'floatUp', run:true}}>
+            animation={{name:'floatUp', run:true}}
+          >
             <ViroImage source={require('../objects/paintings/remedios.png')} style={{flex: .2}} />
           </ViroFlexView>
           <ViroFlexView
@@ -122,7 +122,8 @@ export default class DoorScene extends Component {
             width={10} height={5}
             position={[0.8, 0, -12]}
             rotation={[0, 33, 0]}
-            animation={{name:'floatUp', run:true}}>
+            animation={{name:'floatUp', run:true}}
+          >
             <ViroImage source={require('../objects/paintings/baez.jpg')} style={{flex: .2}} />
           </ViroFlexView>
           <ViroFlexView
@@ -161,7 +162,7 @@ export default class DoorScene extends Component {
           </ViroFlexView>
 
           <ViroAmbientLight color="#ffffff"/>
-          <Viro3DObject source={require('../objects/chapel/chapel_obj.obj')}
+          <Viro3DObject     source={require('../objects/chapel/chapel_obj.obj')}
             resources={[require('../objects/chapel/chapel_obj.mtl')]}
             materials={['church']}
             position={[0, 0, -2]}
@@ -172,20 +173,19 @@ export default class DoorScene extends Component {
             onDrag={()=>{}}
           type="OBJ"/>
           <Viro3DObject source={require('../objects/rose_obj/PrimroseP.obj')}
-            resources={[require('../objects/rose_obj/PrimroseP.mtl'),
+            resources={[
+              require('../objects/rose_obj/PrimroseP.mtl'),
               require('../objects/rose_obj/PRIM1ST.png'),
               require('../objects/rose_obj/PRIM1P.png'),
               require('../objects/rose_obj/PRIM1L2.png'),
               require('../objects/rose_obj/PRIM1L3.png'),
               require('../objects/rose_obj/PRIMsoil.png'),
               require('../objects/rose_obj/vase.png')]}
-            position={[0, -1, -0.05]}
+            position={[0, 0, -0.05]}
             scale={[0.5,0.5,0.5]}
             onClick={this.clickChest}
-          type="OBJ"/> 
+          type="OBJ"/>
         </ViroARPlaneSelector>
-
-
       </ViroARScene>
     )
   }
@@ -196,7 +196,7 @@ export default class DoorScene extends Component {
       growChurch: {properties:{scaleX:-0.2, scaleY:-0.2, scaleZ:-0.2}, easing:"Linear", duration: 3000},
       fadeOut:{properties:{opacity: 0, scaleX:-0.5, scaleY:-0.5, scaleZ:-0.5}, easing:"Linear", duration: 2000},
       fadeIn:{properties:{opacity: 1}, duration: 5000},
-      floatUp:{properties:{positionY:50}, easing:"Linear", duration: 10000}
+      floatUp:{properties:{positionY:10}, easing:"Bounce", duration: 10000}
   })
 
 ViroMaterials.createMaterials({

@@ -112,9 +112,10 @@ export default class BookScene extends Component {
             }
             <ViroSound
               paused={this.state.screamPause}
-              source={require("../objects/sounds/scream_one.mp3")}
+              source={require("../objects/sounds/twinkle.mp3")}
               volume={1.0}
             />
+            
             <ViroSound
               paused={this.state.bookAudio}
               source={require("../objects/sounds/they_never_picked_up_a_book.m4a")}
