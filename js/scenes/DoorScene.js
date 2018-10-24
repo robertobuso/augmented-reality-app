@@ -73,8 +73,12 @@ export default class DoorScene extends Component {
   }
 
   render() {
+    console.log('DoorScene State: ', this.state)
+    console.log('DoorScene Props: ', this.props)
+
     return (
       <ViroARScene>
+
         <ViroSound
           source={require("../objects/sounds/final_scene_soundtrack.mp3")}
           volume={1.0}
@@ -102,7 +106,7 @@ export default class DoorScene extends Component {
         />
 
         <ViroAmbientLight color="#a88be5" intensity={200}/>
-        <ViroARPlane
+        <ViroARPlaneSelector
           minHeight={.2} minWidth={.2} pauseUpdates={this.state.pauseUpdates} onPlaneSelected={this.planeSelected}>
           <Viro3DObject source={require('../objects/rose_obj/PrimroseP.obj')}
             resources={[
@@ -147,7 +151,7 @@ export default class DoorScene extends Component {
             dragType="FixedToWorld"
             onDrag={()=>{}}
           type="OBJ"/>
-        </ViroARPlane>
+        </ViroARPlaneSelector>
 
         {this.state.vaseIsLoaded === true ?
           <ViroNode>

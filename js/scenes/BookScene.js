@@ -67,7 +67,6 @@ export default class BookScene extends Component {
   nextScene = () => {
     this.setState({ tada: false })
     const DoorScene = require('./DoorScene.js')
-    this.props.arSceneNavigator.resetARSession(true, true)
     this.props.arSceneNavigator.push({scene:DoorScene})
   }
 
