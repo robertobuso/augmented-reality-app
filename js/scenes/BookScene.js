@@ -148,7 +148,7 @@ export default class BookScene extends Component {
                 <ViroAmbientLight color="#ffffff"/>
                 {this.state.bookLoaded === true ?
                   <ViroText text='Look Behind You'
-                    scale={[.2, .2, .2]}
+                    scale={[.25, .25, .25]}
                     position={[0, -0.04, -1.1]}
                     rotation={[10,10,0]}
                     style={styles.textStyle} />
@@ -169,7 +169,7 @@ export default class BookScene extends Component {
               {this.state.roseOnChest === true ?
                 <ViroButton
                   source={require("../objects/continue.png")}
-                  position={[3,0,-4]}
+                  position={[3,-0.3,-4]}
                   height={1}
                   width={1.5}
                   rotation={[33,0,0]}
