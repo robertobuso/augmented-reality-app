@@ -29,12 +29,11 @@ export default class ViroSample extends Component {
   render() {
     if (!this.props.start || this.props.start === 'false') {
       return <HomeScene />
-    } else if (this.props.flower_one === true) {
+    } else if (this.props.status === 'flower_one') {
       return <ViroARSceneNavigator {...this.state.sharedProps}
         initialScene={{scene: DoorScene}}/>
-      } else if (this.props.flower_two === true) {
-        return <ViroARSceneNavigator {...this.state.sharedProps}
-          initialScene={{scene: FinalScene}}/>
+      } else if (this.props.status === 'take_flower_one') {
+        return <HomeScene />
       } else  {
           return <ViroARSceneNavigator {...this.state.sharedProps}
             initialScene={{scene: BookScene}}/>

@@ -49,7 +49,7 @@ export const fetchUpdatedFlower = (flower) => {
   const url = 'https://glacial-peak-72949.herokuapp.com/api/v1/experiences/6'
 
   const data = { [`${flower}`]: true,
-                  status: 'saved'}
+                  status: flower}
 
   const options = {
     method: 'PATCH',
@@ -67,7 +67,7 @@ export const fetchUpdatedTask = (task) => {
   const url = 'https://glacial-peak-72949.herokuapp.com/api/v1/experiences/6'
 
   const data = { [`${task}`]: true,
-                  status: 'saved' }
+                  status: task }
 
   const options = {
     method: 'PATCH',

@@ -66,9 +66,8 @@ export default class BookScene extends Component {
 
   nextScene = () => {
     this.setState({ tada: false })
-    const DoorScene = require('./DoorScene.js')
-    this.props.arSceneNavigator.resetARSession(true, true)
-    this.props.arSceneNavigator.push({scene:DoorScene})
+    const HomeScene = require('./HomeScene.js')
+    // this.props.arSceneNavigator.jump({scene:HomeScene})
   }
 
   bookIsLoaded = () => {
@@ -85,6 +84,8 @@ export default class BookScene extends Component {
   }
 
   render() {
+    console.log('BookScene state: ', this.state)
+        console.log('BookScene props: ', this.props)
     return (
           <ViroARScene>
             <ViroSound
