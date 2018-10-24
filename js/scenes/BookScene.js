@@ -148,7 +148,7 @@ export default class BookScene extends Component {
                 <ViroAmbientLight color="#ffffff"/>
                 {this.state.bookLoaded === true ?
                   <ViroText text='Look Behind You'
-                    scale={[.25, .25, .25]}
+                    scale={[.2, .2, .2]}
                     position={[0, -0.04, -1.1]}
                     rotation={[10,10,0]}
                     style={styles.textStyle} />
@@ -197,10 +197,7 @@ ViroMaterials.createMaterials({
 })
 
 ViroAnimations.registerAnimations({
-    animateImage:{properties:{positionX:-3, positionY:-8.5,opacity: 0}, easing:"EaseIn", duration: 2000},
-    growFlower: {properties:{scaleX:0.2, scaleY:0.2, scaleZ:0.2, opacity: 1.0}, easing:"Linear", duration: 3000},
-    minimizeFlower: {properties:{scaleX:-0.3, scaleY:-0.3, scaleZ:-0.3, opacity: 1.0}, easing:"Linear", duration: 3000},
-    growAndAnimateFlower: [["growFlower", "minimizeFlower", "animateImage"]]
+    animateImage:{properties:{positionX:-3, positionY:-8.5,opacity: 0}, easing:"EaseIn", duration: 2000}
 })
 
 const styles = StyleSheet.create({

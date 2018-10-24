@@ -35,7 +35,8 @@ export default class DoorScene extends Component {
         wellDone: true,
         churchAnimation: 'rotateChurch',
         pauseUpdates: false,
-        touchPainting: true
+        touchPainting: true,
+        vaseIsLoaded: false
     }
   }
 
@@ -65,6 +66,10 @@ export default class DoorScene extends Component {
 
   touchPainting = () => {
     this.setState({ touchPainting: false })
+  }
+
+  vaseIsLoaded = () => {
+    this.setState({ vaseIsLoaded: true})
   }
 
   render() {
@@ -99,12 +104,27 @@ export default class DoorScene extends Component {
         <ViroAmbientLight color="#a88be5" intensity={200}/>
         <ViroARPlane
           minHeight={.2} minWidth={.2} pauseUpdates={this.state.pauseUpdates} onPlaneSelected={this.planeSelected}>
+          <Viro3DObject source={require('../objects/rose_obj/PrimroseP.obj')}
+            resources={[
+              require('../objects/rose_obj/PrimroseP.mtl'),
+              require('../objects/rose_obj/PRIM1ST.png'),
+              require('../objects/rose_obj/PRIM1P.png'),
+              require('../objects/rose_obj/PRIM1L2.png'),
+              require('../objects/rose_obj/PRIM1L3.png'),
+              require('../objects/rose_obj/PRIMsoil.png'),
+              require('../objects/rose_obj/vase.png')]}
+            position={[0, 0, -0.05]}
+            scale={[0.5,0.5,0.5]}
+            onClick={this.clickChest}
+            onLoadEnd={this.vaseIsLoaded}
+          type="OBJ"/>
 
           <ViroPortalScene passable={true}  >
             <ViroPortal
               position={[-0.2, 0.5, -0.5]}
               scale={[.25, .25, .25]}
-              opacity={!this.state.opacity}>
+              opacity={!this.state.opacity}
+              animation={{name:'fadeIn', run: this.props.click_church}}>
               <Viro3DObject source={require('../objects/portal_archway/portal_archway.vrx')}
                 resources={[require('../objects/portal_archway/portal_archway_diffuse.png'),
                   require('../objects/portal_archway/portal_archway_normal.png'),
@@ -127,79 +147,66 @@ export default class DoorScene extends Component {
             dragType="FixedToWorld"
             onDrag={()=>{}}
           type="OBJ"/>
-
-          <Viro3DObject source={require('../objects/rose_obj/PrimroseP.obj')}
-            resources={[
-              require('../objects/rose_obj/PrimroseP.mtl'),
-              require('../objects/rose_obj/PRIM1ST.png'),
-              require('../objects/rose_obj/PRIM1P.png'),
-              require('../objects/rose_obj/PRIM1L2.png'),
-              require('../objects/rose_obj/PRIM1L3.png'),
-              require('../objects/rose_obj/PRIMsoil.png'),
-              require('../objects/rose_obj/vase.png')]}
-            position={[0, 0, -0.05]}
-            scale={[0.5,0.5,0.5]}
-            onClick={this.clickChest}
-          type="OBJ"/>
-
         </ViroARPlane>
 
-          {/*Paintings on the left.*/}
-          <ViroFlexView
-            style={{flexDirection: 'row', padding: 1}}
-            width={10} height={5}
-            position={[0.1, 0, -10]}
-            rotation={[0, 33, 0]}
-            animation={{name:'floatUp', run:true}}
-            onClick={this.touchPainting}
-          >
-            <ViroImage source={require('../objects/paintings/remedios.png')} style={{flex: .2}} />
-          </ViroFlexView>
-          <ViroFlexView
-            style={{flexDirection: 'row', padding: 1}}
-            width={10} height={5}
-            position={[0.8, 0, -12]}
-            rotation={[0, 33, 0]}
-            animation={{name:'floatUp', run:true}}
-          >
-            <ViroImage source={require('../objects/paintings/baez.jpg')} style={{flex: .2}} />
-          </ViroFlexView>
-          <ViroFlexView
-            style={{flexDirection: 'row', padding: 1}}
-            width={10} height={5}
-            position={[1.5, 0, -14]}
-            rotation={[0, 33, 0]}
-            animation={{name:'floatUp', run:true}}>
-            <ViroImage source={require('../objects/paintings/orozco.jpg')} style={{flex: .2}} />
-          </ViroFlexView>
+        {this.state.vaseIsLoaded === true ?
+          <ViroNode>
+            <ViroFlexView
+              style={{flexDirection: 'row', padding: 1}}
+              width={10} height={5}
+              position={[0.1, 0, -10]}
+              rotation={[0, 33, 0]}
+              animation={{name:'floatUp', run:true}}
+              onClick={this.touchPainting}
+            >
+              <ViroImage source={require('../objects/paintings/remedios.png')} style={{flex: .2}} />
+            </ViroFlexView>
+            <ViroFlexView
+              style={{flexDirection: 'row', padding: 1}}
+              width={10} height={5}
+              position={[0.8, 0, -12]}
+              rotation={[0, 33, 0]}
+              animation={{name:'floatUp', run:true}}
+            >
+              <ViroImage source={require('../objects/paintings/baez.jpg')} style={{flex: .2}} />
+            </ViroFlexView>
+            <ViroFlexView
+              style={{flexDirection: 'row', padding: 1}}
+              width={10} height={5}
+              position={[1.5, 0, -14]}
+              rotation={[0, 33, 0]}
+              animation={{name:'floatUp', run:true}}>
+              <ViroImage source={require('../objects/paintings/orozco.jpg')} style={{flex: .2}} />
+            </ViroFlexView>
 
-          {/*Paintings on the right*/}
-          <ViroFlexView
-            style={{flexDirection: 'row', padding: 1}}
-            width={10} height={5}
-            position={[3, 0, -10]}
-            rotation={[0, -45, 0]}
-            animation={{name:'floatUp', run:true}}
-            onClick={this.touchPainting}>
-            <ViroImage source={require('../objects/paintings/roche.jpg')} style={{flex: .2}} />
-          </ViroFlexView>
-          <ViroFlexView
-            style={{flexDirection: 'row', padding: 1}}
-            width={10} height={5}
-            position={[4, 0, -12]}
-            rotation={[0, -45, 0]}
-            animation={{name:'floatUp', run:true}}>
-            <ViroImage source={require('../objects/paintings/oller.jpg')} style={{flex: .2}} />
-          </ViroFlexView>
-          <ViroFlexView
-            style={{flexDirection: 'row', padding: 1}}
-            width={10} height={5}
-            position={[5, 0, -14]}
-            rotation={[0, -45, 0]}
-            animation={{name:'floatUp', run:true}}>
-            <ViroImage source={require('../objects/paintings/rodon.jpg')} style={{flex: .2}} />
-          </ViroFlexView>
-
+            {/*Paintings on the right*/}
+            <ViroFlexView
+              style={{flexDirection: 'row', padding: 1}}
+              width={10} height={5}
+              position={[3, 0, -10]}
+              rotation={[0, -45, 0]}
+              animation={{name:'floatUp', run:true}}
+              onClick={this.touchPainting}>
+              <ViroImage source={require('../objects/paintings/roche.jpg')} style={{flex: .2}} />
+            </ViroFlexView>
+            <ViroFlexView
+              style={{flexDirection: 'row', padding: 1}}
+              width={10} height={5}
+              position={[4, 0, -12]}
+              rotation={[0, -45, 0]}
+              animation={{name:'floatUp', run:true}}>
+              <ViroImage source={require('../objects/paintings/oller.jpg')} style={{flex: .2}} />
+            </ViroFlexView>
+            <ViroFlexView
+              style={{flexDirection: 'row', padding: 1}}
+              width={10} height={5}
+              position={[5, 0, -14]}
+              rotation={[0, -45, 0]}
+              animation={{name:'floatUp', run:true}}>
+              <ViroImage source={require('../objects/paintings/rodon.jpg')} style={{flex: .2}} />
+            </ViroFlexView>
+              </ViroNode>
+          : null }
 
       </ViroARScene>
     )
