@@ -19,16 +19,17 @@ class StartContinueButtons extends Component {
       Alert.alert(
         'Please Choose Audio',
         'Press one of the choices.',
-  [
-    {text: 'OK', onPress: () => console.log('OK Pressed')}
-  ],
-  { cancelable: false }
-)
-} else if (response === 'start') {
-  this.props.startNewExperience('new')
-} else if (response === 'continue')
-  this.props.startSavedExperience(this.props)
-  }
+      [
+        {text: 'OK', onPress: () => console.log('OK Pressed')}
+      ],
+      { cancelable: false }
+    )
+    } else if (response === 'start') {
+      this.props.startNewExperience('new')
+    } else if (response === 'continue') {
+      this.props.startSavedExperience(this.props)
+    }
+}
 
   render() {
     return(
@@ -42,7 +43,7 @@ class StartContinueButtons extends Component {
         </View>
 
         {this.props ?
-          this.props.status === 'saved' ?
+          this.props.status != 'new' ?
             <View style={localStyles.buttonInner}>
               <TouchableHighlight style={localStyles.buttons}
                 onPress={(event) => this._handleStartButton('continue')}

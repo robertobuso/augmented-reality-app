@@ -57,7 +57,6 @@ export default class BookScene extends Component {
   }
 
   roseOnChest = () => {
-    this.props.completeTask('take_flower_one')
     this.props.takeFlower('flower_one')
     this.setState({
       roseOnChest: true
@@ -66,8 +65,7 @@ export default class BookScene extends Component {
 
   nextScene = () => {
     this.setState({ tada: false })
-    const HomeScene = require('./HomeScene.js')
-    // this.props.arSceneNavigator.jump({scene:HomeScene})
+    this.props.completeTask('take_flower_one')
   }
 
   bookIsLoaded = () => {
