@@ -82,7 +82,7 @@ export default class DoorScene extends Component {
         />
         <ViroSound
           paused={!this.props.click_chest}
-          source={require("../objects/sounds/tada.mp3")}
+          source={require("../objects/sounds/ending.mp3")}
           volume={1.0}
         />
 
