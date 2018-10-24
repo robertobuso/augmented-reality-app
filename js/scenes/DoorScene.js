@@ -114,6 +114,7 @@ export default class DoorScene extends Component {
               require('../objects/rose_obj/PRIMsoil.png'),
               require('../objects/rose_obj/vase.png')]}
             position={[0, 0, -0.05]}
+            rotation={[33, 0, 0]}
             scale={[0.5,0.5,0.5]}
             onClick={this.clickChest}
             onLoadEnd={this.vaseIsLoaded}
@@ -121,7 +122,7 @@ export default class DoorScene extends Component {
 
           <ViroPortalScene passable={true}  >
             <ViroPortal
-              position={[-0.2, 0.5, -0.5]}
+              position={[-0.2, 1, -0.5]}
               scale={[.25, .25, .25]}
               opacity={!this.state.opacity}
               animation={{name:'fadeIn', run: this.props.click_church}}>
