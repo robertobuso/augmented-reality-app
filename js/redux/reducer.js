@@ -8,7 +8,8 @@ const initialState = {
         drag_book: false,
         take_flower_one: false,
         click_chest: false,
-        click_church: false
+        click_church: false,
+        start_door_scene: false
        }
 
 const reducer = (state = initialState, action) => {

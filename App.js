@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux'
 
-import { loadExperience } from './js/redux/actions'
+import { loadExperience, completeTask } from './js/redux/actions'
 
 import {
   ViroARSceneNavigator
@@ -26,13 +26,18 @@ export default class ViroSample extends Component {
     this.props.loadExperience()
   }
 
+  gotoDoorScene = () => {
+    this.props.completeTask('start_door_scene')
+    return <HomeScene />
+  }
+
   render() {
     console.log('App!', this.props)
     if (!this.props.start || this.props.start === 'false') {
       return <HomeScene />
     } else if (this.props.status === 'take_flower_one') {
-      return <HomeScene />
-    } else if (this.props.status === 'second_scene'){
+      return this.gotoDoorScene()
+    } else if (this.props.status === 'start_door_scene'){
             return <ViroARSceneNavigator {...this.state.sharedProps}
               initialScene={{scene: DoorScene}}/>
     } else {
@@ -46,4 +51,4 @@ const mapStateToProps = (state) => {
   return state
 }
 
-module.exports =  connect(mapStateToProps, { loadExperience })(ViroSample)
+module.exports =  connect(mapStateToProps, { loadExperience, completeTask })(ViroSample)

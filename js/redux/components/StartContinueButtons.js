@@ -38,7 +38,7 @@ class StartContinueButtons extends Component {
           <TouchableHighlight style={localStyles.buttons}
             onPress={(event) => this._handleStartButton('start')}
             underlayColor={'#68a0ff'} >
-            <Text style={localStyles.buttonText}>start</Text>
+            <Text style={localStyles.buttonText}>first scene</Text>
           </TouchableHighlight>
         </View>
 
@@ -48,7 +48,7 @@ class StartContinueButtons extends Component {
               <TouchableHighlight style={localStyles.buttons}
                 onPress={(event) => this._handleStartButton('continue')}
                 underlayColor={'#68a0ff'} >
-                <Text style={localStyles.buttonText}>continue</Text>
+                <Text style={localStyles.buttonText}>second scene</Text>
               </TouchableHighlight>
             </View>
           : null
@@ -74,7 +74,7 @@ const localStyles = StyleSheet.create({
   },
   buttons : {
     height: 50,
-    width: 100,
+    width: 140,
     paddingTop:10,
     paddingBottom:10,
     marginTop: 5,
