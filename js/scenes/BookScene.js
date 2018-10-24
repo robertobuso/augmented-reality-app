@@ -157,8 +157,8 @@ export default class BookScene extends Component {
               <ViroAmbientLight color="#fffeff"/>
               <Viro3DObject source={require('../objects/rose/rose.obj')}
                 resources={[require('../objects/rose/rose.mtl')]}
-                position={[15, -3, 5]}
-                scale={[.04,.04,.04]}
+                position={[25, -3, 5]}
+                scale={[.07,.07,.07]}
                 materials={["rose"]}
                 onClick={this.takeRose}
                 dragType="FixedDistance"
