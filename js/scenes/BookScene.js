@@ -36,7 +36,8 @@ export default class BookScene extends Component {
         bookLoaded: false,
         bookAudio: true,
         soundtrack: false,
-        renderTheRest: false
+        renderTheRest: false,
+        tada: true
       }
   }
 
@@ -64,6 +65,7 @@ export default class BookScene extends Component {
   }
 
   nextScene = () => {
+    this.setState({ tada: false })
     const DoorScene = require('./DoorScene.js')
     this.props.arSceneNavigator.resetARSession(true, true)
     this.props.arSceneNavigator.push({scene:DoorScene})
@@ -91,6 +93,12 @@ export default class BookScene extends Component {
               paused={false}
             />
 
+            <ViroSound
+              source={require("../objects/sounds/tada.mp3")}
+              volume={0.6}
+              paused={this.state.tada}
+            />
+
             {this.state.takeRose === false ?
               <ViroARCamera>
                 <ViroFlexView
@@ -115,7 +123,7 @@ export default class BookScene extends Component {
               source={require("../objects/sounds/twinkle.mp3")}
               volume={1.0}
             />
-            
+
             <ViroNode
               position={[0, 0.3, -.05]}>
               <ViroARPlane
@@ -161,9 +169,10 @@ export default class BookScene extends Component {
               {this.state.roseOnChest === true ?
                 <ViroButton
                   source={require("../objects/continue.png")}
-                  position={[1,0,-4]}
+                  position={[3,0,-4]}
                   height={1}
                   width={1.5}
+                  rotation={[33,0,0]}
                   onClick={this.nextScene}
                 /> : null }
             </ViroNode>

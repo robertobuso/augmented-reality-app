@@ -34,7 +34,8 @@ export default class DoorScene extends Component {
         opacity: 1,
         wellDone: true,
         churchAnimation: 'rotateChurch',
-        pauseUpdates: false
+        pauseUpdates: false,
+        touchPainting: true
     }
   }
 
@@ -62,6 +63,10 @@ export default class DoorScene extends Component {
     this.props.completeTask('click_chest')
   }
 
+  touchPainting = () => {
+    this.setState({ touchPainting: false })
+  }
+
   render() {
     return (
       <ViroARScene>
@@ -81,9 +86,14 @@ export default class DoorScene extends Component {
           paused={this.state.wellDone}
         />
         <ViroSound
-          paused={!this.props.click_chest}
+          paused={!this.props.click_church}
           source={require("../objects/sounds/ending.mp3")}
           volume={1.0}
+        />
+        <ViroSound
+          source={require("../objects/sounds/is_a_painting.m4a")}
+          volume={1.0}
+          paused={this.state.touchPainting}
         />
 
         <ViroAmbientLight color="#a88be5" intensity={200}/>
@@ -115,6 +125,7 @@ export default class DoorScene extends Component {
             position={[0.1, 0, -10]}
             rotation={[0, 33, 0]}
             animation={{name:'floatUp', run:true}}
+            onClick={this.touchPainting}
           >
             <ViroImage source={require('../objects/paintings/remedios.png')} style={{flex: .2}} />
           </ViroFlexView>
@@ -136,13 +147,14 @@ export default class DoorScene extends Component {
             <ViroImage source={require('../objects/paintings/orozco.jpg')} style={{flex: .2}} />
           </ViroFlexView>
 
-          {/*The ones on the right*/}
+          {/*Paintings on the right*/}
           <ViroFlexView
             style={{flexDirection: 'row', padding: 1}}
             width={10} height={5}
             position={[3, 0, -10]}
             rotation={[0, -45, 0]}
-            animation={{name:'floatUp', run:true}}>
+            animation={{name:'floatUp', run:true}}
+            onClick={this.touchPainting}>
             <ViroImage source={require('../objects/paintings/roche.jpg')} style={{flex: .2}} />
           </ViroFlexView>
           <ViroFlexView
