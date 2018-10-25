@@ -126,7 +126,7 @@ export default class DoorScene extends Component {
 
           <ViroPortalScene passable={true}  >
             <ViroPortal
-              position={[-0.2, 0.75, -0.5]}
+              position={[-0.2, 0.8, -0.5]}
               scale={[.25, .25, .25]}
               opacity={!this.state.opacity}
               animation={{name:'fadeIn', run: this.props.click_church}}>

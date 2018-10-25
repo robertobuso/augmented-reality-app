@@ -161,8 +161,6 @@ export default class BookScene extends Component {
                 scale={[.07,.07,.07]}
                 materials={["rose"]}
                 onClick={this.takeRose}
-                dragType="FixedDistance"
-                onDrag={()=>{}}
                 animation={{name:'animateImage', run:this.state.takeRose, onFinish:this.roseOnChest}}
               type="OBJ"/>
               {this.state.roseOnChest === true ?
