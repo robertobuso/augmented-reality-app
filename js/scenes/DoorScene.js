@@ -36,7 +36,8 @@ export default class DoorScene extends Component {
         churchAnimation: 'rotateChurch',
         pauseUpdates: false,
         touchPainting: true,
-        vaseIsLoaded: false
+        vaseIsLoaded: false,
+        playEnding: false
     }
   }
 
@@ -54,7 +55,8 @@ export default class DoorScene extends Component {
     } else {
       this.setState({
           opacity: 0,
-          churchAnimation: 'fadeOut'
+          churchAnimation: 'fadeOut',
+          playEnding:true
       }, () => this.props.completeTask('click_church'))
     }
   }
@@ -78,7 +80,7 @@ export default class DoorScene extends Component {
         <ViroSound
           source={require("../objects/sounds/final_scene_soundtrack.mp3")}
           volume={1.0}
-          paused={false}
+          paused={this.state.playEnding}
         />
         <ViroSound
           source={require("../objects/sounds/click_chest_wrong.m4a")}
@@ -113,11 +115,13 @@ export default class DoorScene extends Component {
               require('../objects/rose_obj/PRIM1L3.png'),
               require('../objects/rose_obj/PRIMsoil.png'),
               require('../objects/rose_obj/vase.png')]}
-            position={[0, 0, -0.05]}
+            position={[0, 0.7, -0.05]}
             rotation={[0, 33, 0]}
-            scale={[0.5,0.5,0.5]}
+            scale={[0.7,0.7,0.7]}
             onClick={this.clickChest}
             onLoadEnd={this.vaseIsLoaded}
+            dragType="FixedToWorld"
+            onDrag={()=>{}}
           type="OBJ"/>
 
           <ViroPortalScene passable={true}  >

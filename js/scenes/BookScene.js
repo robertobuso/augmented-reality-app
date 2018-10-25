@@ -64,7 +64,7 @@ export default class BookScene extends Component {
   }
 
   nextScene = () => {
-    this.setState({ tada: false })
+    // this.setState({ tada: false })
     this.props.completeTask('take_flower_one')
   }
 
